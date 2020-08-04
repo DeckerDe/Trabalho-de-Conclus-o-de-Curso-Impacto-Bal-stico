@@ -1,0 +1,337 @@
+% ------------------------------------------------------------------------
+% ------------------------------------------------------------------------
+% Modelo UFSC para Trabalhos Academicos (tese de doutorado, dissertação de
+% mestrado) utilizando a classe abntex2
+%
+% Autor: Alisson Lopes Furlani
+% 	Modificações:
+%	- 27/08/2019: Alisson L. Furlani, add pacote 'glossaries' para listas
+%   - 06/11/2019: Luiz-Rafael Santos, modifica para Trabalho de Conclusão de Curso
+% ------------------------------------------------------------------------
+% ------------------------------------------------------------------------
+
+\documentclass[
+	% -- opções da classe memoir --
+	12pt,				% tamanho da fonte
+	%openright,			% capítulos começam em pág ímpar (insere página vazia caso preciso)
+	oneside,			% para impressão no anverso. Oposto a twoside
+	a4paper,			% tamanho do papel. 
+	% -- opções da classe abntex2 --
+	chapter=TITLE,		% títulos de capítulos convertidos em letras maiúsculas
+	section=TITLE,		% títulos de seções convertidos em letras maiúsculas
+	%subsection=TITLE,	% títulos de subseções convertidos em letras maiúsculas
+	%subsubsection=TITLE,% títulos de subsubseções convertidos em letras maiúsculas
+	% -- opções do pacote babel --
+	english,			% idioma adicional para hifenização
+	%french,				% idioma adicional para hifenização
+	%spanish,			% idioma adicional para hifenização
+	brazil				% o último idioma é o principal do documento
+	]{abntex2}
+
+\usepackage{setup/ufscthesisA4-alf}
+
+% ---
+% Filtering and Mapping Bibliographies
+% ---
+% Pacotes de citações
+% ---
+\usepackage{csquotes}
+\usepackage{float}
+\usepackage{mathtools}
+\usepackage[backend = biber, style = abnt]{biblatex}
+\usepackage{subcaption}
+\newcommand\ddfrac[2]{\frac{\displaystyle #1}{\displaystyle #2}}
+% FIXME Se desejar estilo numérico de citações,  comente a linha acima e descomente a linha a seguir.
+% \usepackage[backend = biber, style = numeric-comp]{biblatex}
+
+\setlength\bibitemsep{\baselineskip}
+\DeclareFieldFormat{url}{Disponível~em:\addspace\url{#1}}
+\NewBibliographyString{sineloco}
+\NewBibliographyString{sinenomine}
+\DefineBibliographyStrings{brazil}{%
+	sineloco     = {\mkbibemph{S\adddot l\adddot}},
+	sinenomine   = {\mkbibemph{s\adddot n\adddot}},
+	andothers    = {\mkbibemph{et\addabbrvspace al\adddot}},
+	in			 = {\mkbibemph{In:}}
+}
+
+\addbibresource{aftertext/references.bib} % Seus arquivos de referências
+
+% ---
+\DeclareSourcemap{
+	\maps[datatype=bibtex]{
+		% remove fields that are always useless
+		\map{
+			\step[fieldset=abstract, null]
+			\step[fieldset=pagetotal, null]
+		}
+		% remove URLs for types that are primarily printed
+%		\map{
+%			\pernottype{software}
+%			\pernottype{online}
+%			\pernottype{report}
+%			\pernottype{techreport}
+%			\pernottype{standard}
+%			\pernottype{manual}
+%			\pernottype{misc}
+%			\step[fieldset=url, null]
+%			\step[fieldset=urldate, null]
+%		}
+		\map{
+			\pertype{inproceedings}
+			% remove mostly redundant conference information
+			\step[fieldset=venue, null]
+			\step[fieldset=eventdate, null]
+			\step[fieldset=eventtitle, null]
+			% do not show ISBN for proceedings
+			\step[fieldset=isbn, null]
+			% Citavi bug
+			\step[fieldset=volume, null]
+		}
+	}
+}
+% ---
+
+% ---
+% Informações de dados para CAPA e FOLHA DE ROSTO
+% ---
+% FIXME Substituir 'Nome completo do autor' pelo seu nome.
+\autor{Deiwid Decker Hoffer}
+% FIXME Substituir 'Título do trabalho' pelo título da trabalho.
+\titulo{Uma revisão sobre a simulação computacional do impacto balístico.}
+% FIXME Substituir 'Subtítulo (se houver)' pelo subtítulo da trabalho.  
+% Caso não tenha substítulo, comente a linha a seguir.
+%\subtitulo{Subtítulo (se houver)}
+% FIXME Substituir 'XXXXXX' pelo nome do seu
+% orientador.
+\orientador{Prof. Marcio Celso Fredel, Dr.}
+% FIXME Se for orientado por uma mulher, comente a linha acima e descomente a linha a seguir.
+% \orientador[Orientadora]{Nome da orientadora, Dra.}
+% FIXME Substituir 'XXXXXX' pelo nome do seu
+% coorientador. Caso não tenha coorientador, comente a linha a seguir.
+%\coorientador{Prof. XXXXXX, Dr.}
+% FIXME Se for coorientado por uma mulher, comente a linha acima e descomente a linha a seguir.
+% \coorientador[Coorientadora]{XXXXXX, Dra.}
+% FIXME Substituir 'XXXXXX' pelo nome do Coordenador do 
+% programa/curso.
+\coordenador{Prof. Celso Peres, Dr.}
+% FIXME Se for coordenadora mulher, comente a linha acima e descomente a linha a seguir.
+% \coordenador[Coordenadora]{Nome da Coordenadora, Dra.}
+% FIXME Substituir '[ano da entrega]' pelo ano (ano) em que seu trabalho foi defendido.
+\ano{2020}
+% FIXME Substituir '[dia] de [mês] de [ano]' pela data em que ocorreu sua defesa.
+\data{[dia] de [mês] de 2020}
+% FIXME Substituir '[Cidade da defesa]' pela cidade em que ocorreu sua defesa.
+\local{Florianópolis}
+\instituicaosigla{UFSC}
+\instituicao{Universidade Federal de Santa Catarina}
+% FIXME Substituir 'Dissertação/Tese' pelo tipo de trabalho (Tese, Dissertação). 
+\tipotrabalho{Trabalho de Conclusão de Curso}
+% FIXME Substituir '[licenciado/bacharel] em [nome do título obtido]' pela grau adequado.
+\formacao{bacharel em Engenharia de Materiais}
+% FIXME Substituir '[licenciado/bacharel]' pelo nivel adequado.
+\nivel{bacharel}
+% FIXME Substituir 'Curso de Graduação em [XXXXXXXX]' pela curso adequado.
+\programa{Curso de Graduação em Engenharia de Materiais}
+% FIXME Substituir 'Campus XXXXXX ou Centro de XXXXXX' pelo campus ou centro adequado.
+\centro{Centro Tecnológico}
+\preambulo
+{%
+\imprimirtipotrabalho~do~\imprimirprograma~do~\imprimircentro~da~\imprimirinstituicao~para~a~obtenção~do~título~de~\imprimirformacao.
+}
+% ---
+
+% ---
+% Configurações de aparência do PDF final
+% ---
+% alterando o aspecto da cor azul
+\definecolor{blue}{RGB}{41,5,195}
+% informações do PDF
+\makeatletter
+\hypersetup{
+     	%pagebackref=true,
+		pdftitle={\@title}, 
+		pdfauthor={\@author},
+    	pdfsubject={\imprimirpreambulo},
+	    pdfcreator={LaTeX with abnTeX2},
+		pdfkeywords={ufsc, latex, abntex2}, 
+		colorlinks=true,       		% false: boxed links; true: colored links
+    	linkcolor=black,%blue,          	% color of internal links
+    	citecolor=black,%blue,        		% color of links to bibliography
+    	filecolor=black,%magenta,      		% color of file links
+		urlcolor=black,%blue,
+		bookmarksdepth=4
+}
+\makeatother
+% ---
+
+% ---
+% compila a lista de abreviaturas e siglas e a lista de símbolos
+% ---
+
+% Declaração das siglas
+\siglalista{ABNT}{Associação Brasileira de Normas Técnicas}
+
+% Declaração dos simbolos
+\simbololista{pi}{\ensuremath{\pi}}{Número pi} 
+\simbololista{r}{\ensuremath{r}}{Raio de um círculo}
+\simbololista{A}{\ensuremath{A}}{Área de um círculo}
+\simbololista{deltaK}{\ensuremath{\delta_{ij}}}{Símbolo de Kronecker Delta}
+\simbololista{levicivita}{\ensuremath{\epsilon_{ijk}}}{Símbolo de Levi Civita}
+\simbololista{E}{\ensuremath{E}}{Tensor deformação de Green-Lagrange}
+\simbololista{C}{\ensuremath{C}}{Tensor deformação direito de Cauchy-Green}
+\simbololista{B}{\ensuremath{B}}{Tensor deformação esquerdo de Cauchy-Green}
+\simbololista{U}{\ensuremath{U}}{Tensor direito de estiramento}
+\simbololista{V}{\ensuremath{V}}{Tensor esquerdo de estiramento}
+\simbololista{F}{\ensuremath{F}}{Tensor gradiente da deformação}
+\simbololista{H}{\ensuremath{H}}{Tensor gradiente do deslocamento}
+\simbololista{eps}{\ensuremath{\varepsilon}}{Tensor deformação infinitesimal}
+\simbololista{R}{\ensuremath{R}}{Tensor rotação}
+\simbololista{rho}{\ensuremath{\rho}}{Densidade do corpo na configuração espacial}
+\simbololista{rhor}{\ensuremath{\rho_r}}{Densidade do corpo na configuração material}
+\simbololista{Omegar}{\ensuremath{\Omega_r}}{Região ocupada pelo corpo na configuração material}
+\simbololista{Omega}{\ensuremath{\Omega}}{Região ocupada pelo corpo na configuração espacial}
+\simbololista{t}{\ensuremath{\boldsymbol{t}}}{Força de superfície}
+\simbololista{b}{\ensuremath{\boldsymbol{b}}}{Força de corpo}
+\simbololista{Cauchy}{\ensuremath{\boldsymbol{\sigma}}}{Tensor de tensões de Cauchy}
+\simbololista{P}{\ensuremath{\boldsymbol{P}}}{Primeiro tensor de tensões de Piola-Kirchhoff}
+\simbololista{e_r}{\ensuremath{e_r}}{Energia interna do corpo na configuração material}
+\simbololista{K}{\ensuremath{\mathcal{K}(\Omega_r)}}{Energia cinética do corpo na configuração material}
+\simbololista{convpower}{\ensuremath{\mathcal{W}_0(\Omega_r)}}{Potência externa aplicada ao corpo na configuração material}
+\simbololista{Pint}{\ensuremath{\mathcal{P}_{int}(\Omega_r)}}{Potência interna do corpo na configuração material}
+\simbololista{Etot}{\ensuremath{\mathcal{E}_{tot}(\Omega_r)}}{Energia total do corpo na configuração material}
+\simbololista{Q}{\ensuremath{\mathcal{Q}(\Omega_r)}}{Fluxo de calor na configuração material}
+\simbololista{I}{\ensuremath{\boldsymbol{I}}}{Tensor identidade}
+\simbololista{printens}{\ensuremath{\sigma_i}}{Tensões principais}
+\simbololista{prinvadesv}{\ensuremath{J_i}}{Invariantes do tensor de tensões desviadoras}
+\simbololista{prinva}{\ensuremath{I_i}}{Invariantes do tensor de tensões}
+\simbololista{N}{\ensuremath{\boldsymbol{N}}}{Vetor fluxo plástico}
+\simbololista{gamma}{\ensuremath{\dot{\gamma}}}{multiplicador plástico}
+\simbololista{defplastacu}{\ensuremath{ \overline{\varepsilon}^p }}{Deformação plástica acumulada}
+\simbololista{hugoniot}{\ensuremath{\sigma_{LEH}}}{Limite elástico de Hugoniot}
+\simbololista{u}{\ensuremath{\boldsymbol{u}}}{Campo vetorial de deslocamentos do corpo}
+\simbololista{uvir}{\ensuremath{\boldsymbol{\hat{u}}}}{Campo vetorial de deslocamentos virtuais do corpo}
+
+
+% compila a lista de abreviaturas e siglas e a lista de símbolos
+\makenoidxglossaries 
+
+% ---
+
+% ---
+% compila o indice
+% ---
+\makeindex
+% ---
+
+% ----
+% Início do documento
+% ----
+\begin{document}
+
+% Seleciona o idioma do documento (conforme pacotes do babel)
+%\selectlanguage{english}
+\selectlanguage{brazil}
+
+% Retira espaço extra obsoleto entre as frases.
+\frenchspacing 
+
+% Espaçamento 1.5 entre linhas
+\OnehalfSpacing
+
+% Corrige justificação
+%\sloppy
+
+% ----------------------------------------------------------
+% ELEMENTOS PRÉ-TEXTUAIS
+% ----------------------------------------------------------
+% \pretextual %a macro \pretextual é acionado automaticamente no início de \begin{document}
+% ---
+% Capa, folha de rosto, ficha bibliografica, errata, folha de apróvação
+% Dedicatória, agradecimentos, epígrafe, resumos, listas
+% ---
+\input{beforetext/beforetext}
+% ---
+
+% ----------------------------------------------------------
+% ELEMENTOS TEXTUAIS
+% ----------------------------------------------------------
+\textual
+
+% ---
+% 1 - Introdução
+% ---
+\include{chapters/Intro}
+% ---
+
+% ---
+% 2 - Desenvolvimento-
+% ---
+\include{chapters/CapMecCont}
+\include{chapters/CapElFin}
+\include{chapters/CapModConst}
+\include{chapters/CapPen}
+% ---
+
+% ---
+% 3 - Conclusão
+% ---
+%\phantompart
+\include{chapters/Conc}
+% ---
+
+% ----------------------------------------------------------
+% ELEMENTOS PÓS-TEXTUAIS
+% ----------------------------------------------------------
+\postextual
+% ----------------------------------------------------------
+
+% ----------------------------------------------------------
+% Referências bibliográficas
+% ----------------------------------------------------------
+\begingroup
+    \SingleSpacing\printbibliography[title=REFERÊNCIAS]
+\endgroup
+
+% ----------------------------------------------------------
+% Glossário
+% ----------------------------------------------------------
+%
+% Consulte o manual da classe abntex2 para orientações sobre o glossário.
+%
+%\glossary
+
+% ----------------------------------------------------------
+% Apêndices
+% ----------------------------------------------------------
+
+% ---
+% Inicia os apêndices
+% ---
+%\begin{apendicesenv}
+%	\partapendices* 
+%	\input{aftertext/apendice_a}
+%\end{apendicesenv}
+% ---
+
+
+% ----------------------------------------------------------
+% Anexos
+% ----------------------------------------------------------
+
+% ---
+% Inicia os anexos
+% ---
+%\begin{anexosenv}
+%	\partanexos*
+%	\input{aftertext/anexo_a}
+%\end{anexosenv}
+
+%---------------------------------------------------------------------
+% INDICE REMISSIVO
+%---------------------------------------------------------------------
+%\phantompart
+%\printindex
+%---------------------------------------------------------------------
+
+\end{document}
