@@ -41,9 +41,9 @@ A contribuição da mecânica do contínuo é a definição das deformações fi
 
 O método dos elementos finitos é abordado depois da mecânica do contínuo por ser usado para resolver o balanço de momento linear. A consideração de todos os fatores envolvidos em uma simulação de impacto balístico leva a um problema de alta complexidade, portanto não é interessante apresentar a fundamentação da ferramenta neste ambiente. A apresentação feita neste trabalho usa um problema simplificado, pois o objetivo é mostrar os constituintes básicos que por sua vez estão presentes desde o mais simples até o mais complexo dos problemas. \\
 
-O comportamento dos materiais quando impactados é normalmente fundamentado pela plasticidade computacional, portanto este assunto é brevemente abordado para a posterior exposição dos modelos constitutivos mais usados na aplicação balística. O modelo constitutivo se acopla ao método dos elementos finitos gerando uma tensão a depender de variáveis termodinâmicas da solução em um certo ponto e momento do tempo. Basicamente ele recebe variáveis termodinâmicas e devolve tensões, que por sua vez são usadas para o equilíbrio mecânico, gerando um processo iterativo de resolução. \\
+O comportamento dos materiais quando impactados é fundamentado pela plasticidade computacional, portanto este assunto é brevemente abordado para a posterior exposição dos modelos constitutivos mais usados na aplicação balística. O modelo constitutivo é acoplado ao método dos elementos finitos e é responsável por calcular o estado de tensão a depender de variáveis termodinâmicas da solução em um certo ponto e momento do tempo. Basicamente ele recebe variáveis termodinâmicas e devolve tensões, que por sua vez são usadas para resolver o equilíbrio mecânico, gerando um processo iterativo de resolução. \\
 
-Por fim a mecânica da penetração é usada para definir o problema resolvido, por meio da geometria e das condições de contorno. Além disso a interpretação da simulação é feita com base nas teorias deste campo, portanto é importante para um analista saber quais são em teoria os resultados possíveis da simulação. A mecânica do da penetração é um vasto campo, portanto o trabalho aborda a fundamentação teórica dos impactos em estruturas leves, com foco particular em materiais cerâmicos. 
+Por fim a mecânica da penetração é usada para definir o problema resolvido, por meio da geometria e das condições de contorno. Além disso a interpretação da simulação é feita com base nas teorias deste campo, por conseguinte é importante para um analista saber quais são, em teoria, os resultados possíveis da simulação. A mecânica do da penetração é um vasto campo, sendo assim o trabalho aborda a fundamentação teórica dos impactos em estruturas leves, com enfoque particular nos materiais cerâmicos. 
 
 \begin{figure}[H]
  	\caption{\label{fig:diagramalog} Diagrama lógico da fundamentação teórica de uma simulação computacional de um impacto balístico}
@@ -69,8 +69,8 @@ Revisar a fundamentação teórica das áreas de maior influência na simulaçã
 % ----------------------------------------------------------
 
 \begin{itemize}
-    \item Revisar os fundamentos mecânica do contínuo com foco na descrição de deformações finitesimais e nas leis de equilíbrio.
+    \item Revisar os fundamentos da mecânica do contínuo com foco na descrição de deformações finitesimais e nas leis de equilíbrio.
     \item Revisar os fundamentos do método dos elementos finitos com foco em sistemas dinâmicos.
-    \item Revisar os fundamentos da plasticidade computacional e apresentar os modelos mais usados quando altas taxas de deformação estão presentes.
-    \item Revisar o processo de penetração de projéteis com velocidades inferiores a $2000 m/s$
+    \item Revisar os fundamentos da plasticidade computacional e apresentar os modelos constitutivos mais usados quando altas taxas de deformação estão presentes.
+    \item Revisar o processo de penetração de projéteis com velocidades inferiores a $2000 m/s$, com enfoque em alvos feitos de material cerâmico.
 \end{itemize}
