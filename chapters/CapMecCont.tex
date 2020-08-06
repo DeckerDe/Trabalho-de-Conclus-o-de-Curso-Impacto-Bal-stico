@@ -59,45 +59,46 @@ Dado que um corpo contínuo pode ser visto como uma aglomeração de pontos no e
 Onde a função $ \mathcal{X} $, tal que $ \boldsymbol{x} = \mathcal{X}(\boldsymbol{X},t) $, chama-se função movimento e é responsável por mapear a localização de uma partícula em um determinado tempo. Observa-se que $ \boldsymbol{u}(\boldsymbol{x},t) =  \boldsymbol{U}(\boldsymbol{X},t)  $, já que ambos representam o mesmo campo de deslocamentos, porém descrito de formas diferentes. \par
 
 Possuindo os deslocamentos é possível descrever as deformações provenientes destes deslocamentos.\footnote{É importante notar que há um acumulo de termos quando se trata da mecânica do contínuo em português. O atual assunto é traduzido como deformação, porém em inglês trata-se de "deformation". O conceito da deformação usual, que é causadora de tensões, será abordado nas próximas seções e em inglês chama-se "strain". Por hora a diferença não é pronunciada, porém no futuro ela será novamente citada.} O campo primordial quando o assunto é a descrição das deformações chama-se gradiente da deformação $ \boldsymbol{F} $, eq. \ref{eq:desl_grad}.
-
+% CONTINUAR REVISÃO %
 \begin{align}\label{eq:desl_grad}
     \boldsymbol{F}(\boldsymbol{X},t) = \boldsymbol{F} \\
     F_{ij} = \frac{\partial \mathcal{X}_i}{\partial X_j}
 \end{align}
 
-Existem deformações homogêneas e não homogêneas. Basicamente as deformações homogêneas são aquelas onde o gradiente da deformação é independe da posição no corpo. De forma geral pode se dizer que sendo $ \boldsymbol{dx} $ uma fibra espacial infinitesimal e $ \boldsymbol{dX} $ uma fibra material infinitesimal. Tanto para deformações homogêneas quanto para não homogêneas é válida a eq. \ref{eq:nonhomdef}.
+São duas as possíveis formas de deformação em um corpo, a forma homogênea e a não homogênea. Basicamente as deformações homogêneas são aquelas onde o gradiente da deformação é independe da posição no corpo. De forma geral pode se dizer que sendo $ \boldsymbol{dx} $ uma fibra espacial infinitesimal e $ \boldsymbol{dX} $ uma fibra material infinitesimal. Tanto para deformações homogêneas quanto para não homogêneas é válida a eq. \ref{eq:nonhomdef}. Esta equação mostra que as fibras infinitesimais deformadas são resultado de uma transformação das fibras deformadas, esta transformação é caracterizada pelo tensor $\boldsymbol{F}$.
 
 \begin{equation}
     \boldsymbol{dx} = \boldsymbol{F}(\boldsymbol{X},t) \boldsymbol{dX}
     \label{eq:nonhomdef}
 \end{equation}
 
-O determinante do gradiente da deformação é chamado por \cite{gurtin_fried_anand_2013} de Jacobiano volumétrico e por \cite{hiermaier_2008} de determinante do Jacobiano. Doravante este determinante será chamado de jacobiano ou $ J $. Esta simplificação ocorrerá pois o jacobiano de área não será abordado.
-\begin{equation}
-    J = det(\boldsymbol{F}) = \frac{dv}{dV}
-\end{equation}
 
-Apresenta-se aqui, sem prova, o teorema da decomposição polar. \footnote{A prova encontra-se em \cite{gurtin_fried_anand_2013} pg.33}
+%O determinante do gradiente da deformação é chamado por \cite{gurtin_fried_anand_2013} de Jacobiano volumétrico e por \cite{hiermaier_2008} de determinante do Jacobiano. Doravante este determinante será chamado de jacobiano ou $ J $. Esta simplificação ocorrerá pois o jacobiano de área não será abordado.
+%\begin{equation}
+%    J = det(\boldsymbol{F}) = \frac{dv}{dV}
+%\end{equation}
+
+O tensor $\boldsymbol{F}$ caracteriza uma transformação das fibras de indeformadas para deformadas. Esta descrição leva em consideração tanto a rotação quanto o estiramento das fibras. Para separar estas é usado um teorema chamado de decomposição polar, apresentado aqui sem prova. \footnote{A prova encontra-se em \cite{gurtin_fried_anand_2013} pg.33}
 
 \begin{equation}
     \boldsymbol F = \boldsymbol{RU} = \boldsymbol{VR}
 \end{equation}
 
-Esta é uma decomposição multiplicativa na qual o tensor de deformações $ \boldsymbol{F} $ é separado em uma parte relacionada à rotação de corpo rígido e uma ao estiramento do corpo, respectivamente $ \boldsymbol{R} $ e $ \boldsymbol{U} $ ou $ \boldsymbol{V} $. Sendo $ \boldsymbol{\gls{R}}$ um tensor ortogonal. $ \boldsymbol U = \boldsymbol{U}(\boldsymbol{X},t) $ é chamado de tensor de estiramento direito e pertence à configuração material. Já $ \boldsymbol V = \boldsymbol{V}(\boldsymbol{x},t) $ chama-se tensor de estiramento esquerdo e pertence à configuração espacial. Usando $ \boldsymbol{\gls{V}} $  e $ \boldsymbol{\gls{U}} $ é possível chegar a outros dois tensores, são eles $ \gls{C}$ e \gls{B}. $ \boldsymbol{\gls{C}} $ é o tensor deformação direito de Cauchy-Green e $ \boldsymbol{\gls{B}} $ é o tensor deformação esquerdo de Cauchy-Green. 
+Esta é uma decomposição multiplicativa, na qual, o tensor de deformações $ \boldsymbol{F} $ é separado em uma parte relacionada à rotação de corpo rígido e uma ao estiramento do corpo. São elas respectivamente $ \boldsymbol{R} $ e $ \boldsymbol{U} $ ou $ \boldsymbol{V} $, onde $ \boldsymbol{\gls{R}}$ é um tensor ortogonal. $ \boldsymbol U = \boldsymbol{U}(\boldsymbol{X},t) $ é chamado de tensor de estiramento direito e pertence à configuração material. Já $ \boldsymbol V = \boldsymbol{V}(\boldsymbol{x},t) $ chama-se tensor de estiramento esquerdo e pertence à configuração espacial, de acordo com \cite{intromec}. Usando $ \boldsymbol{\gls{V}} $  e $ \boldsymbol{\gls{U}} $ é possível chegar a outros dois tensores, são eles $ \gls{C}$ e \gls{B}. $ \boldsymbol{\gls{C}} $ é o tensor deformação direito de Cauchy-Green e $ \boldsymbol{\gls{B}} $ é o tensor deformação esquerdo de Cauchy-Green. 
 
 \begin{align}
     & \boldsymbol{C} = \boldsymbol{F^TF} = \boldsymbol{U}^2 \\
     & \boldsymbol{B} = \boldsymbol{FF^T} = \boldsymbol{V}^2
 \end{align}
 
-Conhecendo todos estes tensores é possível introduzir a deformação da forma mais conhecida na engenharia, que é a traduzida da palavra em inglês "strain". O tensor deformação de Green-Lagrange $ \boldsymbol{E} $ representado na equação \ref{eq:green_lag} é um tensor finitesimal de deformação, logo ele é adequado para medir deformações arbitrariamente grandes.
+Conhecendo $\boldsymbol{C}$ é possível introduzir a deformação da forma mais conhecida na engenharia, que é a traduzida da palavra em inglês "strain". O tensor deformação de Green-Lagrange $ \boldsymbol{E} $ representado na equação \ref{eq:green_lag} é um tensor finitesimal de deformação, por conta disso é adequado para medir deformações arbitrariamente grandes.
 
 \begin{equation}
    \boldsymbol{E}(\boldsymbol{X},t) =  \boldsymbol{E} = \frac{1}{2}(\boldsymbol{F^TF - I}) = \frac{1}{2}(\boldsymbol{C - I}) = \frac{1}{2}(\boldsymbol{U^2 - I})
     \label{eq:green_lag}
 \end{equation}
 
-É possível escrever o tensor de Green-Lagrange de forma diferente. Para tal é apresentado o tensor $\boldsymbol{H}$, que é o gradiente dos deslocamentos.
+ O tensor de Green-Lagrange pode ser escrito de forma diferente, em função do gradiente dos deslocamentos. Para tal, é apresentado o tensor $\boldsymbol{H}$, que é o gradiente do deslocamento.
 \begin{equation}
     \boldsymbol{H} = \nabla \boldsymbol{u}
     \label{eq:desl_gradH}
@@ -109,7 +110,7 @@ O tensor $ \boldsymbol{H} $ se relaciona com $ \boldsymbol{F} $ da seguinte form
 \end{equation}
 
 Onde $ I $ é o tensor identidade.
-Usando a relação entre $\boldsymbol{\gls{F}} $ e $ \boldsymbol{\gls{H}} $ o tensor de Green-Lagrange pode ser escrito em função do gradiente do deslocamento. 
+Ao inserir a relação entre $\boldsymbol{\gls{F}} $ e $ \boldsymbol{\gls{H}} $ no tensor de Green-Lagrange, este pode ser escrito em função do gradiente do deslocamento. 
 
  \boldmath\begin{align}
     E &= \frac{1}{2}((I + H)^T(I+H) - I)\\
@@ -120,7 +121,7 @@ Usando a relação entre $\boldsymbol{\gls{F}} $ e $ \boldsymbol{\gls{H}} $ o te
     \label{eq:green_lag_desl}
 \end{align} \unboldmath
 
-O tensor deformação de Green-Lagrange escrito em função do gradiente do deslocamento da origem a um tensor muitas vezes chamado simplesmente de deformação. Na verdade este é o tensor deformação infinitesimal $ \boldsymbol{\gls{eps}} $, que é uma linearização do tensor deformação de Green-Lagrange. Este tensor é válido apenas para deformações de ordem infinitesimal, já que desconsidera o termo de maior ordem do tensor $ \gls{E} $. Sua expressão é dada a seguir.
+O tensor deformação de Green-Lagrange escrito em função do gradiente do deslocamento é o ponto de partida para a dedução de um tensor chamado deformação infinitesimal,  $ \boldsymbol{\gls{eps}} $. Este tensor é uma linearização da deformação de Green-Lagrange. Sendo assim, ele é válido, apenas, para deformações de ordem infinitesimal, já que desconsidera o termo de maior ordem do tensor $ \gls{E} $. Sua expressão é dada a seguir.
 
 \begin{equation} \label{eq:definfi}
     \boldsymbol{\varepsilon} = \frac{1}{2}(\nabla \boldsymbol{u} + \nabla \boldsymbol{u}^T)
@@ -133,7 +134,7 @@ Para ilustrar o comportamento dos tensores de deformação $\boldsymbol{E}$ e $\
 	x_3 &= X_3 
 \end{align}
 
-Este movimento denota um estado uniaxial de deformação fictício. Note que no instante $t=1$ o corpo já tem um aumento de 100\% de seu comprimento. Muito embora valores de deformação na casa dos $100\%$ não seja comum em situações estáticas, o mesmo não pode ser dito quando há carregamento dinâmico em alta velocidade. Em simulações de impactos balísticos é comum obter deformações na casa dos $ 200\% $, porém como isto não é numericamente interessante um recurso chamado erosão é ativado. Na erosão o elemento é deletado quando atinge alguma variável atinge certo valor, normalmente a deformação é usada para ativar a erosão. Um valor de ativação comum para a erosão pela deformação é de $150\%$. \par
+Este movimento denota um estado uniaxial de deformação fictício. Note que no instante $t=1$ o corpo já tem um aumento de 100\% de seu comprimento. Deformação na casa dos $100\%$ não são comuns em situações estáticas, porém o mesmo não pode ser dito em um impacto balístico. Em simulações de impactos balísticos é comum obter deformações na casa dos $ 200\% $ ou mais. Tais deformações não são numericamente interessantes, então um recurso chamado erosão entra em ação. Na erosão o elemento é deletado quando alguma variável limitadora atinge certo valor. Na literatura o uso da deformação como variável limitadora é dominante, o valor padrão para a deformação que ativa a erosão é 150\%, vide \cite{theorymanls}.  \par
 
 \begin{figure}[H]
 \caption{Participação das parcelas do tensor de Euler-Lagrange}
@@ -143,9 +144,11 @@ Este movimento denota um estado uniaxial de deformação fictício. Note que no 
 	\fonte{O autor (2020)}
 \end{figure}
 
-A figura \ref{fig:gradmult} denota a componente 11 das matrizes que representam o tensor de Green-Lagrange e o de deformações infinitesimais para um corpo submetido ao movimento supracitado. Observa-se que em baixos níveis de deformação, representados na imagem a direita, a parcela de maior ordem, chamada no gráfico de gradmult e correspondente à linha amarela, permanece com valor irrisório. Neste caso os valores do tensor de Green-Lagrange e o de deformações infinitesimais são semelhantes. Dado que computacionalmente o tensor infinitesimal tem custo menor ele é usado na grande maioria dos casos. De fato este é um tensor adequado para se trabalhar em casos onde há deformações e deslocamentos muito pequenos. A partir de certo ponto a parcela chamada de gradmult começa a ter influência significativa no tensor $ \gls{E} $ fazendo com que $ \gls{E} $ e $ \gls{eps} $ se distanciem. Por conta deste distanciamento o tensor infinitesimal é inadequado quando grandes deformações estão presentes. \par
+A figura \ref{fig:gradmult} denota a componente 11 das matrizes que representam o tensor de Green-Lagrange e o de deformações infinitesimais para um corpo submetido ao movimento supracitado. Observa-se que, em baixos níveis de deformação, imagem a direita, a parcela de maior ordem, gradmult, permanece com valor irrisório. Neste caso os valores do tensor de Green-Lagrange e o de deformações infinitesimais são semelhantes. Dado que computacionalmente o tensor infinitesimal tem custo menor, ele é usado na grande maioria dos casos. A deformação infinitesimal apenas se aplica aos casos nos quais as deformações e os deslocamentos são muito pequenos. A motivação para tal é que a partir de certo ponto a parcela chamada de gradmult começa a ter influência significativa no tensor $ \gls{E} $, fazendo com que $ \gls{E} $ e $ \gls{eps} $ se distanciem. \par
 
-Além dos tensores $ \gls{E} $ e $ \boldsymbol{\gls{eps}} $ existem outros que são muito usados para medir a deformação em um corpo contínuo, porém $\gls{E}$ é o mais relevante e os outros não serão abordados para manter a brevidade do trabalho.
+Além dos tensores $ \gls{E} $ e $ \boldsymbol{\gls{eps}} $ existem outros que são muito usados para medir a deformação em um corpo contínuo, porém $\gls{E}$ é o mais relevante e os outros não serão abordados para manter a brevidade do trabalho. \\
+
+Como este trabalho trata apenas dos fundamentos, as deformações infinitesimais serão usadas para abordar os conteúdos que seguem. Porém, em uma aplicação real seria necessário adaptar tais formulações às deformações finitesimais.
 
 \section{Princípios termomecânicos básicos}
 
@@ -158,20 +161,20 @@ A conservação de massa em sua forma global é apresentada na equação \ref{eq
     \label{eq:consmassa}
 \end{equation}
 
-Onde $ \gls{Omegar} $ e $ \gls{Omega} $ são respectivamente a região ocupada pelo corpo na configuração material e espacial. Já $ \gls{rhor} $ e $ \gls{rho} $ são respectivamente a densidade do corpo na configuração material e espacial. Como o braço esquerdo da equação \ref{eq:consmassa} não depende do tempo, ao deriva-la o resultado é a equação \ref{eq:consmassa2}. O símbolo $ \dot{\overline{entidade}} $ significa a derivação no tempo da entidade em questão.
+Onde $ \gls{Omegar} $ e $ \gls{Omega} $ são, respectivamente, a região ocupada pelo corpo na configuração material e espacial. Já $ \gls{rhor} $ e $ \gls{rho} $ são, respectivamente, a densidade do corpo na configuração material e espacial. Como o braço esquerdo da equação \ref{eq:consmassa} não depende do tempo, ao deriva-la o resultado é a equação \ref{eq:consmassa2}. O símbolo $ \dot{\overline{entidade}} $ significa a derivação no tempo da entidade em questão.
 \begin{equation}
     \dot{\overline{\int_{\Omega} \rho(\boldsymbol{x,t}) dv(\boldsymbol{x})}} = 0
     \label{eq:consmassa2}
 \end{equation}
 
-O teorema do transporte de Reynold é aplicado na equação \ref{eq:consmassa2} tendo \ref{eq:consmassalocal0} como resultado. Admitindo que cada subdivisão do corpo deve respeitar a eq. \ref{eq:consmassalocal0} a forma local do balanço de massa, eq \ref{eq:consmassalocal}, é alcançada.\footnote{O teorema do transporte de Reynold pode ser encontrado em \cite{gurtin_fried_anand_2013} pg. 113}
+O teorema do transporte de Reynold é aplicado na equação \ref{eq:consmassa2} tendo \ref{eq:consmassalocal0} como resultado. Admitindo que cada subdivisão do corpo deve respeitar a eq. \ref{eq:consmassalocal0}, a forma local do balanço de massa, eq \ref{eq:consmassalocal}, é alcançada.\footnote{O teorema do transporte de Reynold pode ser encontrado em \cite{gurtin_fried_anand_2013} pg. 113}
 
 \begin{align}
     \int_{\Omega} (\dot{\rho} + \rho div\boldsymbol{v})  dv &= 0 \label{eq:consmassalocal0} \\
     \dot{\rho} + \rho \; div\boldsymbol{v} &= 0 \label{eq:consmassalocal}
 \end{align}
 
-O balanço de massa deve ser respeitado tanto na formulação lagrangiana quanto na euleriana. Porém na formulação euleriana o balanço de massa se torna mais difícil de obedecer, já que pode haver fluxo do material através da malha. Este fluxo deve ser calculado e levado em consideração durante uma simulação. Quando se trata de uma descrição lagrangiana não há fluxo de material entre os elementos, sendo assim obedecer a conservação de massa se torna mais fácil, pois não há fluxo de massa entre elementos. 
+O balanço de massa deve ser respeitado tanto na formulação lagrangiana quanto na euleriana. Porém, na formulação euleriana o balanço de massa se torna mais difícil de obedecer, já que pode haver fluxo do material através da malha. Este fluxo deve ser calculado e levado em consideração durante uma simulação. Quando se trata de uma descrição lagrangiana não há fluxo de material entre os elementos, sendo assim obedecer a conservação de massa se torna mais fácil. 
 
 \subsection{Balanço de momento linear e angular}
 
@@ -190,6 +193,8 @@ Como uma consequência do balanço de massa, de acordo com \cite{gurtin_fried_an
    \dot{\overline{\boldsymbol{l}(\Omega)}} = \int_{\Omega} \rho \dot{\boldsymbol{v}} dv \label{eq:linmoment} \\
    \dot{\overline{\boldsymbol{a}(\Omega)}} = \int_{\Omega} \boldsymbol{r} \times \rho \dot{\boldsymbol{v}} dv \label{eq:angmoment}
 \end{align}
+
+%CONTINUAR A REVISAO%
 
 Para completar o balanço falta discutir a aplicação de força no corpo. \cite{gurtin_fried_anand_2013} afirma que existem três tipos de força na mecânica do contínuo. 
 \begin{itemize}
