@@ -194,15 +194,13 @@ Como uma consequência do balanço de massa, de acordo com \cite{gurtin_fried_an
    \dot{\overline{\boldsymbol{a}(\Omega)}} = \int_{\Omega} \boldsymbol{r} \times \rho \dot{\boldsymbol{v}} dv \label{eq:angmoment}
 \end{align}
 
-%CONTINUAR A REVISAO%
-
-Para completar o balanço falta discutir a aplicação de força no corpo. \cite{gurtin_fried_anand_2013} afirma que existem três tipos de força na mecânica do contínuo. 
+Para completar a descrição do balanço, falta discutir a aplicação de força em um corpo. \cite{gurtin_fried_anand_2013} afirma que existem três tipos de força na mecânica do contínuo. 
 \begin{itemize}
-    \item Forças de contato entre regiões adjacentes que tem interseção ao longo de seu contorno.
-    \item Forças de contato no contorno do corpo que são exercidas pelo ambiente.
-    \item Forças de corpo em todos os pontos dele que são exercidas pelo ambiente.
+    \item Forças de contato entre regiões adjacentes, que tem interseção ao longo de seu contorno.
+    \item Forças de contato no contorno do corpo, que são exercidas pelo ambiente.
+    \item Forças de corpo em todos os pontos, que são exercidas pelo ambiente em todos os pontos do corpo.
 \end{itemize}
-De acordo com \cite{gurtin_fried_anand_2013} um dos maiores axiomas da mecânica do contínuo é a hipótese de Cauchy, que se refere às forças de contato e está representada graficamente na figura \ref{fig:hipotesecauchy}. 
+De acordo com \cite{gurtin_fried_anand_2013} um dos maiores axiomas da mecânica do contínuo é a hipótese de Cauchy. Ela refere-se às forças de contato e está representada graficamente na figura \ref{fig:hipotesecauchy}. 
 
 \begin{figure}[H]
     \centering
@@ -212,16 +210,16 @@ De acordo com \cite{gurtin_fried_anand_2013} um dos maiores axiomas da mecânica
     \fonte{\cite{gurtin_fried_anand_2013}}
 \end{figure}
 
-Em sua hipótese Cauchy insere um campo de tração superficial $ \boldsymbol{t}(\boldsymbol{x, n},t) $ definido para cada vetor unitário $ \boldsymbol{n} $, ponto $ \boldsymbol{x} $ pertencente ao corpo e tempo $ t $. O campo $ \boldsymbol{t}(\boldsymbol{x, n},t) $ tem a seguinte propriedade: Dada qualquer superfície espacial $ S $ pertencente ao corpo, $ \boldsymbol{t}(\boldsymbol{x, n},t) $ representa a força por unidade de área exercida através de $ S $. Esta força é aplicada no material na porção negativa e pelo material na porção positiva. \\
+Em sua hipótese, Cauchy insere um campo de tração superficial, $ \boldsymbol{t}(\boldsymbol{x, n},t) $, definido para cada vetor normal unitário $ \boldsymbol{n} $, ponto $ \boldsymbol{x} $ pertencente ao corpo e tempo $ t $. O campo $ \boldsymbol{t}(\boldsymbol{x, n},t) $ tem a seguinte propriedade: Dada qualquer superfície espacial $ S $ pertencente ao corpo, $ \boldsymbol{t}(\boldsymbol{x, n},t) $ representa a força por unidade de área exercida através de $ S $. De acordo com a figura \ref{fig:hipotesecauchy} a superfície divide o corpo em duas porções. A porção negativa, localizada à esquerda de $S$, e a porção positiva, localizada à direita. A força exercida através de $S$, de acordo com \cite{gurtin_fried_anand_2013}, é aplicada no material, na porção negativa, e pelo material, na porção positiva.  \\
 
-De acordo com \cite{gurtin_fried_anand_2013} para descobrir a força entre regiões adjacentes $ P $ e $D$ é necessário fazer uma integrar a tração ao longo da superfície $ S=P\cap D $. O resultado desta integração é a expressão \ref{eq:forçasup}.
+De acordo com \cite{gurtin_fried_anand_2013} para descobrir a força entre regiões adjacentes $ P $ e $D$ é necessário  integrar a tração ao longo da superfície $ S=P\cap D $. O resultado desta é a expressão \ref{eq:forçasup}.
 
 \begin{equation}
     \int_{S} \boldsymbol{t(n)}\, da = \int_{S} \boldsymbol{t}(\boldsymbol{x, n},t) \, da(\boldsymbol{x})
     \label{eq:forçasup}
 \end{equation}
 
-A força total exercida pelo meio no corpo $ \Omega $ é descrita pela expressão \ref{eq:forçasuptot}. Onde $\boldsymbol{n}$ é a normal da superfície do corpo no ponto onde $\boldsymbol{t}$ está sendo avaliado e $\partial \Omega$ é toda a superfície do corpo.
+Portanto, ao considerar toda a superfície do corpo, a região $S$ passa a ser escrita como $\partial \Omega$. A força total exercida pelo meio no corpo $ \Omega $ é descrita pela expressão \ref{eq:forçasuptot}. Onde $\boldsymbol{n}$ é a normal da superfície do corpo no ponto no qual $\boldsymbol{t}$ está sendo avaliado e $\partial \Omega$ é toda a superfície do corpo.
 \begin{equation}
     \int_{\partial \Omega} \boldsymbol{t(n)} \, da
     \label{eq:forçasuptot}
@@ -251,22 +249,23 @@ A igualdade entre a derivada temporal do momento linear e a força total exercid
     \int_{\partial \Omega} \boldsymbol{r} \times \boldsymbol{t(n)} da + \int_{\Omega}    \boldsymbol{r} \times \boldsymbol{b} dv = \int_{\Omega} \boldsymbol{r} \times \rho \dot{\boldsymbol{v}} dv \label{eq:angbal} 
 \end{equation}
 
-O teorema de Cauchy é apresentado, sem prova-lo.\footnote{A prova do teorema de Cauchy pode ser encontrada em \cite{gurtin_fried_anand_2013} pg. 137} Uma consequência do balanço de momento linear é que existe um tensor $\gls{Cauchy}$ chamado tensor de tensões de Cauchy. Tal que a expressão \ref{eq:CauchyStress} é válida.
+O teorema de Cauchy é apresentado, sem prova-lo.\footnote{A prova do teorema de Cauchy pode ser encontrada em \cite{gurtin_fried_anand_2013} pg. 137}. De acordo com o teorema, uma consequência do balanço de momento linear é que existe um tensor $\gls{Cauchy}$ chamado tensor de tensões de Cauchy. Tal que a expressão \ref{eq:CauchyStress} é válida.
 
 \begin{equation}
     \boldsymbol{t(n)} = \boldsymbol{\sigma n} \label{eq:CauchyStress}
 \end{equation}
 
-O teorema de Cauchy possibilita derivar a forma local tanto do balanço de momento linear quanto do balanço de momento angular. A derivação do balanço de momento linear local será feita a seguir, porém a mesma derivação para o balanço de momento angular local não será feita, por conta de sua extensão. Esta derivação pode ser encontrada em \cite{gurtin_fried_anand_2013} pg. 140 e resulta que $ \gls{Cauchy} = \gls{Cauchy}^T $, portanto o balanço de momento angular local implica a simetria do tensor de tensões de Cauchy. \par
+O teorema de Cauchy possibilita derivar a forma local tanto do balanço de momento linear quanto do balanço de momento angular. A derivação do balanço de momento linear local será feita a seguir. Porém, a derivação do balanço de momento angular local não será feita, por conta de sua extensão. Esta pode ser encontrada em \cite{gurtin_fried_anand_2013} pg. 140 e resulta que $ \gls{Cauchy} = \gls{Cauchy}^T $, portanto o balanço de momento angular local implica a simetria do tensor de tensões de Cauchy. \par
 
-Tendo como forma inicial o balanço de momento linear global, o teorema de Cauchy é aplicado chegando em \ref{eq:forma2}. Então ao aplicar o teorema do divergente ao primeiro termo do braço esquerdo a expressão \ref{eq:forma3} é obtida.\footnote{ O teorema do divergente implica na igualdade entre uma integral ao longo de um contorno e uma integral no volume deste contorno. Uma explicação deste pode ser encontrada em \cite{gurtin_fried_anand_2013} pg. 52. } A expressão \ref{eq:forma3} é válida para qualquer subdivisão do corpo, dado que qualquer uma delas tem as mesmas propriedades que o próprio corpo. A validade de \ref{eq:forma3} para qualquer subdivisão possibilita assumir que para qualquer ponto \ref{eq:locallinbal} deve ser atendida. O nome dado à expressão \ref{eq:locallinbal} é forma local espacial do balanço de momento linear. 
+O ponto de partida é o balanço de momento linear global, eq. \ref{eq:linbal}. O teorema de Cauchy é aplicado chega-se na eq. \ref{eq:forma2}. Ao aplicar o teorema do divergente no primeiro termo do braço esquerdo da eq. \ref{forma2}, a expressão \ref{eq:forma3} é obtida.\footnote{ O teorema do divergente implica na igualdade entre uma integral ao longo de um contorno e uma integral no volume deste contorno. Uma explicação deste pode ser encontrada em \cite{gurtin_fried_anand_2013} pg. 52. } De acordo com \cite{gurtin_fried_anand_2013} a expressão \ref{eq:forma3} é válida para qualquer subdivisão do corpo. Isto possibilita assumir que para qualquer ponto a eq. \ref{eq:locallinbal} deve ser atendida. O nome dado à expressão \ref{eq:locallinbal} é forma local do balanço de momento linear na configuração espacial. 
 \begin{align}
     &\int_{\partial \Omega} \boldsymbol{t(n)} \, da + \int_{\Omega} \boldsymbol{b}\, dv = \int_{\Omega} \rho \dot{\boldsymbol{v}} \,dv \\
     &\int_{\partial \Omega} \boldsymbol{\sigma n} \,da + \int_{\Omega} \boldsymbol{b}\, dv = \int_{\Omega} \rho \dot{\boldsymbol{v}} \,dv \label{eq:forma2} \\ 
     &\int_{\Omega} \boldsymbol{div \sigma} \,dv + \int_{\Omega} \boldsymbol{b} \,dv = \int_{\Omega} \rho \dot{\boldsymbol{v}} \,dv  \label{eq:forma3} \\
     &div\gls{Cauchy} + \boldsymbol{b} = \rho \boldsymbol{\dot{v}} \label{eq:locallinbal}
 \end{align}
-
+%TODO O RESTO ESTÁ COMENTADO
+\begin{comment}
 \subsection{Balanço de potencias}
 
 A equação \ref{eq:locallinbal}, o balanço local do momento linear, foi apresentada na configuração espacial. O balanço de potencias será trabalhado na configuração material e por conta disso é apresentada a equação \ref{eq:locallinbalmat}, que é o balanço de momento linear local na configuração material. Houve uma pequena alteração na notação usada até agora, na expressão \ref{eq:locallinbalmat} as quantidades relacionadas à configuração material não estão mais maiúsculas e sim com um $r$ subscrito. Além disso é inserido o primeiro tensor tensão de Piola-Kirchhoff $\gls{P}$, que pertence à configuração material. Ele é chamado de tensão de engenharia em uma curva tensão deformação de engenharia, enquanto o tensor tensão de Cauchy é a tensão real. 
@@ -325,6 +324,6 @@ Usando o balanço de potencias \ref{eq:baldepotencias} chega-se na forma do bala
 
 A equação \ref{eq:balenergia} termina a descrição dos princípios termo-mecânicos básicos. A segunda lei da termodinâmica não foi citada por ter maior representação como uma limitação à teoria constitutiva dos materiais, elas é usada para cunhar modelos consistentes. A teoria constitutiva não será abordada em termos de suas das limitações e teorias energéticas envolvidas, no entanto os modelos constitutivos serão apresentados e discutidos de forma expositiva.
 
-
+\end{comment}
 
 
