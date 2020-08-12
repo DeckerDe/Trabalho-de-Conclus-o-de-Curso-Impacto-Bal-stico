@@ -24,28 +24,31 @@ Em problemas envolvendo impacto balístico as não linearidades encontradas são
 Como dito anteriormente as não linearidades serãoo desconsideradas, portanto as deformações serão consideradas infinitesimais. Além disso, os efeitos da temperatura não serão levados em consideração. Como apresentado no \ref{Cap:MecCont} a expressão \ref{eq:locallinbal} é a forma local do balanço de momento linear, também chamada de primeira equação do movimento de Cauchy. Doravante os dois nomes serão usados. Já que tudo que vem a seguir será apresentado considerando deformações infinitesimais não haverá distinção entre a configuração material e espacial. 
 
 \section{Condições iniciais e de contorno}
-% CONTINUAR REVISAO
 
-O objetivo é resolver a forma local do balanço de momento linear, porém a variável adequada para tal está, de certa forma, escondida dentro dos termos da expressão. Esta em função da variável citada é obtida notando que $ \dot{\boldsymbol{v}}(\boldsymbol{x},t) = \ddot{\boldsymbol{u}}(\boldsymbol{x},t) $ onde $ \boldsymbol{u} = \boldsymbol{u}(\boldsymbol{x},t)$ é o campo dos deslocamentos e $ \ddot{\boldsymbol{u}} = \ddot{\boldsymbol{u}} (\boldsymbol{x},t) $ o campo das acelerações. \\ A resolução feita em função do campo de deslocamentos gera um problema de valor inicial de segunda ordem, no qual são necessárias duas condições iniciais e duas de contorno.\\
+O objetivo é resolver a forma local do balanço de momento linear. A forma do balanço de momento adequada resolução é obtida notando que $ \dot{\boldsymbol{v}}(\boldsymbol{x},t) = \ddot{\boldsymbol{u}}(\boldsymbol{x},t) $ onde $ \boldsymbol{u} = \boldsymbol{u}(\boldsymbol{x},t)$ é o campo dos deslocamentos e $ \ddot{\boldsymbol{u}} = \ddot{\boldsymbol{u}} (\boldsymbol{x},t) $ é o campo das acelerações. A forma a ser resolvida está na expressão \ref{eq:balancoresolvido} \\ A resolução feita em função do campo de deslocamentos gera um problema de valor inicial de segunda ordem, no qual são necessárias duas condições iniciais e duas de contorno.\\
 
-\begin{equation}
+\begin{equation}\label{eq:balancoresolvido}
 	div\boldsymbol{\sigma(\boldsymbol{u})} + \boldsymbol{b} = \rho \ddot{\boldsymbol{u}}
 \end{equation}
 
-As condições iniciais são o deslocamento e a velocidade em $ t = 0 $ que podem ser denotadas da seguinte forma.
+As condições iniciais são o deslocamento e a velocidade em $ t = 0 $, que podem ser denotadas da seguinte forma.
 
 \begin{align} 
 	\boldsymbol{u}(\boldsymbol{x},t)|_{t=0} = \boldsymbol{u}_{0}(\boldsymbol{x}) \\
 	\dot{\boldsymbol{u}}(\boldsymbol{x},t)|_{t=0} = \dot{\boldsymbol{u}_{0}}(\boldsymbol{x})
 \end{align} 
 
-As condições de contorno, como sugere o nome, são aplicadas no ou nos contornos do corpo. Observa-se na figura \ref{fig:condcont}, que há distinção entre duas regiões do contorno. A primeira região considerada é $ \partial \Omega_u $, onde são aplicadas as condições de contorno essenciais ou de Dirichlet. Conforme \cite{Paulo} estas condições são responsáveis pela restrição dos movimentos de corpo rígido. Na figura \ref{fig:condcont} é apresentado um corpo em duas dimensões, portanto este tem três movimentos de corpo rígido que devem ser restritos para a solução de um problema estático hipotético. Em um problema dinâmico os movimentos de corpo rígido só devem ser restritos quando necessário para a correta representação da situação simulada. Estas condições de contorno são chamadas de essenciais pois restringem a variável primal do problema, $ \boldsymbol{u}(\boldsymbol{x},t) $ neste caso, e sua representação é feita da seguinte forma.
+As condições de contorno são aplicadas no ou nos contornos do corpo. Observa-se na figura \ref{fig:condcont}, que há distinção entre duas regiões do contorno. A primeira região a ser considerada é $ \partial \Omega_u $, onde são aplicadas as condições de contorno essenciais ou de Dirichlet. Conforme \cite{Paulo} estas condições são responsáveis pela restrição dos movimentos de corpo rígido. Na figura \ref{fig:condcont} é apresentado um corpo em duas dimensões, portanto este tem três movimentos de corpo rígido. Estes devem ser restritos para a solução de um problema estático hipotético. Em um problema dinâmico os movimentos de corpo rígido só devem ser restritos quando necessário para a correta representação da situação simulada. De acordo com \cite{Paulo} estas condições de contorno são chamadas de essenciais pois restringem a variável primal do problema, $ \boldsymbol{u}(\boldsymbol{x},t) $ neste caso. Sua representação é feita da seguinte forma.
 
 \begin{equation}
 	u = \overline{u} \quad \forall \; \boldsymbol{x} \; \in  \partial \Omega_u
 \end{equation}
 
-Onde \gls{u} é o campo vetorial de deslocamentos do corpo. Uma consideração a ser feita é o impacto numérico das condições de contorno essenciais. Em um sistema estático o método dos elementos finitos chega em uma equação algébrica que se apresenta de forma matricial, $ \boldsymbol{K} \boldsymbol{U} = \boldsymbol{F} $. Um desenvolvimento do caminho até chegar nesta equação algébrica será feito nas partes que seguem. A matriz $ \boldsymbol{K} $ chama-se matriz de rigidez e caso não sejam aplicadas condições de contorno essenciais em um problema estático a matriz ela é singular. Um sistema contendo uma matriz singular não tem uma solução unívoca, portanto não é útil. O Fato de não ter solução unívoca tem leitura física imediata: Já que sem as condições de contorno essenciais o corpo tem seus movimentos de corpo rígido irrestritos, então infinitos campos de deslocamento são responsáveis pela mesma deformação. A matriz $\boldsymbol{K} $ passa a ser não singular e portanto o sistema tem solução univoca quando as condições de contorno essenciais são bem postas, sendo assim restringem todos os movimentos de corpo rígido em um sistema estático. Em sistemas dinâmicos as forças de d'Alembert se contrapõem ao movimento irrestrito, não havendo problemas quanto à singularidade. Mesmo sem o problema da singularidade estar presente as condições de contorno são extremamente importantes para a correta tradução da física do fenômeno.\footnote{Por tradução quer-se dizer transferência do fenômeno para um problema numérico. O prof. Paulo de tarso Rocha de Mendonça, autor de \cite{Paulo} disse em uma de suas aulas que é comum resolver corretamente o problema errado. } \\
+Onde \gls{u} é o campo vetorial de deslocamentos do corpo. Uma consideração a ser feita é o impacto numérico das condições de contorno essenciais. O método dos elementos finitos resulta em uma equação algébrica a ser resolvida. No caso de sistemas mecânicos estáticos e lineares a seguinte equação algébrica é o resultado do método:
+\begin{equation}
+    \boldsymbol{K} \boldsymbol{U} = \boldsymbol{F} 
+\end{equation}
+$ \boldsymbol{K} $ chama-se matriz de rigidez. Caso não sejam aplicadas condições de contorno essenciais, em um problema estático, ela é singular. Um sistema contendo uma matriz singular não tem uma solução unívoca, portanto não é útil. O Fato de não ter solução unívoca tem leitura física imediata: Sem as condições de contorno essenciais o corpo tem seus movimentos de corpo rígido irrestritos, então infinitos campos de deslocamento podem ser responsáveis pela mesma deformação. A matriz $\boldsymbol{K} $ passa a ser não singular, o sistema passa a ter solução univoca, quando as condições de contorno essenciais são bem postas. Condições bem postas são, neste caso, aquelas que restringem todos os movimentos de corpo rígido em um sistema estático. Em sistemas dinâmicos as forças de d'Alembert se contrapõem ao movimento irrestrito, de acordo com \cite{Paulo}. Mesmo sem o problema da singularidade estar presente, as condições de contorno são extremamente importantes para a correta tradução da física do fenômeno.\footnote{Por tradução quer-se dizer transferência do fenômeno para um problema numérico. O prof. Paulo de tarso Rocha de Mendonça, autor de \cite{Paulo} disse em uma de suas aulas que é comum resolver corretamente o problema errado. } \\
 
 \begin{figure}
 	\caption{Corpo com condições de contorno.}
@@ -54,13 +57,13 @@ Onde \gls{u} é o campo vetorial de deslocamentos do corpo. Uma consideração a
 	\fonte{O autor (2020)}
 \end{figure}
 
-As condições de contorno naturais ou condições de contorno de Von Neumann são identificadas fisicamente como trações de superfície. Estas condições são necessárias para a correta descrição do problema diferencial, sendo responsáveis pela "transmissão" das forças aplicadas ao corpo para a formulação matemática. Estas condições não atuam na variável primal, todavia atuam no campo de tensões, que é função do campo de deslocamentos através da relação ou modelo constitutivo usado. As condições de contorno naturais podem ser descritas da seguinte forma.
+As condições de contorno naturais ou condições de contorno de Von Neumann são identificadas fisicamente como trações de superfície. Elas são necessárias para a correta descrição do problema diferencial, sendo responsáveis pelas forças aplicadas ao corpo. Estas condições não atuam na variável primal. Elas atuam no campo de tensões, que é função do campo de deslocamentos através da relação ou modelo constitutivo usado. As condições de contorno naturais podem ser descritas da seguinte forma.
 
 \begin{equation}
 	\boldsymbol{t} = \boldsymbol{\sigma}\boldsymbol{n} = \boldsymbol{\overline{t}} \quad \forall \; \boldsymbol{x} \; \in \; \partial \Omega_{\sigma}
 \end{equation}
 
-Agora todas as expressões necessárias para uma definição bem posta de um problema diferencial estão disponíveis. É dito que o problema está na forma forte, pois fornece a solução exata restringindo as possíveis soluções ao conjunto de funções $C1$. \footnote{Conjunto de funções onde, além de outras exigências, a primeira derivada deve ser contínua.}
+Agora todas as expressões necessárias para uma definição bem posta de um problema diferencial estão disponíveis. De acordo com \cite{Paulo} neste estado o problema está na forma chamada forte, pois fornece a solução exata restringindo as possíveis soluções ao conjunto de funções $C1$. \footnote{Conjunto de funções onde, além de outras exigências, a primeira derivada deve ser contínua.} O problema a ser resolvido na forma forte é o seguinte:
 \begin{align}
     \begin{cases}
 	div\boldsymbol{\sigma(\boldsymbol{u})} + \boldsymbol{b} = \rho \ddot{\boldsymbol{u}}\\
@@ -71,27 +74,27 @@ Agora todas as expressões necessárias para uma definição bem posta de um pro
 	\end{cases}
 \end{align}
 
-A solução de um problema na forma forte deve ser obtida através de procedimentos analíticos, já que o problema é contínuo. Por conta disto a sua resolução passa a não ser trivial, até mesmo em domínios pouco complexos. Desta não trivialidade surge a necessidade da transformação desta forma forte em uma forma fraca, que por sua vez será discretizada e resolvida numericamente.
+A solução de um problema na forma forte deve ser obtida através de procedimentos analíticos, já que este é contínuo. Por conta disto, a resolução deste problema em domínios arbitrários não é trivial. De acordo com \cite{Paulo} a forma forte deve ser transformada em uma forma chamada fraca, para então ser discretizada e resolvida numericamente.
 
 \subsection{A forma fraca}
-A construção da forma fraca será feita pelo principio dos trabalhos virtuais, conhecido como PTV. O primeiro passo é multiplicar a equação por uma função vetorial arbitrária, que é representada por $ \boldsymbol{\hat{u}} = \boldsymbol{\hat{u}}(\boldsymbol{x})  $ e é chamada função teste ou de deslocamentos virtuais. Ao integrar o resultado da operação anterior ao longo de todo o corpo é obtida a equação \ref{eq:formafraca1}.
+A construção da forma fraca será feita pelo principio dos trabalhos virtuais, conhecido como PTV. O primeiro passo para tal é multiplicar a equação por uma função vetorial arbitrária, que é representada por $ \boldsymbol{\hat{u}} = \boldsymbol{\hat{u}}(\boldsymbol{x})  $ e é chamada função teste ou de deslocamentos virtuais. Ao integrar, ao longo de todo o corpo, o resultado da operação anterior é obtida a equação \ref{eq:formafraca1}.
 \begin{equation}
 \int_{\Omega} div(\boldsymbol{\sigma}) \cdot \boldsymbol{\hat{u}} + \boldsymbol{b} \cdot \boldsymbol{\hat{u}} - \rho\ddot{\boldsymbol{u}} \cdot \boldsymbol{\hat{u}} \; dV = 0
 \label{eq:formafraca1}
 \end{equation}
 
-Aplicando a regra do produto de forma particularmente conveniente e lembrando que por conta do equilíbrio do momento angular o tensor de tensão de Cauchy é simétrico, é possível trabalhar o primeiro termo da integral em \ref{eq:formafraca1} da seguinte forma.\footnote{Esta passagem não é trivial, porém a expressão da regra do produto usada pode ser encontrada sem derivação em \cite{Holzapfel} equação 1.290}
+De acordo com \cite{Holzapfel} o próximo passo é aplicar a regra do produto, usando a simetria do tensor de tensões de Cauchy. Com isso, é possível trabalhar o primeiro termo da integral em \ref{eq:formafraca1} da seguinte forma.\footnote{Esta passagem não é trivial, porém a expressão da regra do produto usada pode ser encontrada sem derivação em \cite{Holzapfel} equação 1.290}
 \begin{equation}
 	div \boldsymbol{\sigma} \cdot \boldsymbol{\hat{u}} = div(\boldsymbol{\sigma}\boldsymbol{\hat{u}}) - \boldsymbol{\sigma} : grad \boldsymbol{\hat{u}}
 	\label{eq:formafraca2}
 \end{equation}
 
-Usando o teorema do divergente para alterar o primeiro termo do braço direito da equação \ref{eq:formafraca2}, a propriedade comutativa do produto interno e novamente a simetria do tensor de tensões de Cauchy.
+Ao aplicar o teorema do divergente, a propriedade comutativa do produto interno e novamente a simetria do tensor de tensões de Cauchy no primeiro termo do braço direito da equação \ref{eq:formafraca2}. Obtêm-se a seguinte expressão.
 \begin{equation} \label{eq:formafracatrans}
 	\int_{\Omega} div(\boldsymbol{\sigma \hat{u}}) dV = \int_{\partial \Omega} \boldsymbol{\sigma \hat{u}} \cdot \boldsymbol{n} ds = \int_{\partial \Omega} \boldsymbol{\sigma n} \cdot \boldsymbol{\hat{u}} ds
 \end{equation}
 
-Substituindo \ref{eq:formafracatrans} na equação \ref{eq:formafraca1}.
+Ao substituir \ref{eq:formafracatrans} na equação \ref{eq:formafraca1}, é obtida a seguinte expressão.
 
 \begin{equation}
 \int_{\Omega} \boldsymbol{\sigma} : grad \boldsymbol{\hat{u}} -  \boldsymbol{b} \cdot \boldsymbol{\hat{u}} + \rho\ddot{\boldsymbol{u}} \cdot \boldsymbol{\hat{u}} dV - \int_{\partial \Omega} \boldsymbol{\sigma n} \cdot \boldsymbol{\hat{u}} ds = 0
@@ -109,7 +112,7 @@ Já os deslocamentos virtuais chamados anteriormente de arbitrários devem perte
 \end{equation}
 
 
-Agora separando a segunda integral da equação \ref{eq:formafraca3}, considerando que $ \boldsymbol{\overline{u}} = 0 \quad \forall \boldsymbol{x} \in \partial \Omega_u $ e sabendo que $ \boldsymbol{\sigma n} = \boldsymbol{\overline{t}} \quad \forall \in \partial \Omega_{\sigma} $.\footnote{O motivo para considerar $ \boldsymbol{\overline{u}} = 0$ é a simplificação da expressão seguinte. É costumeiro considerar que o problema não tem condição de contorno de dirichlet, então montar o sistema completo e aplicar as condições de contorno na forma matricial. }
+De acordo com \cite{Paulo} agora ao destaca-se a segunda integral da equação \ref{eq:formafraca3}, considerando que $ \boldsymbol{\overline{u}} = 0 \quad \forall \boldsymbol{x} \in \partial \Omega_u $ e sabendo que $ \boldsymbol{\sigma n} = \boldsymbol{\overline{t}} \quad \forall \in \partial \Omega_{\sigma} $.
 
 \begin{equation} \label{eq:formafracatrans}
 	\int_{\partial \Omega} \boldsymbol{\sigma n} \cdot \boldsymbol{\hat{u}} ds = \int_{\partial \Omega_u} \boldsymbol{\sigma n} \cdot \boldsymbol{0} ds + \int_{\partial \Omega_{\sigma}} \boldsymbol{\overline{t}} \cdot \boldsymbol{\hat{u}} ds = \int_{\partial \Omega_{\sigma}} \boldsymbol{\overline{t}} \cdot \boldsymbol{\hat{u}} ds 
@@ -121,7 +124,7 @@ A forma fraca do problema é finalmente caracterizada pela seguinte expressão, 
 	\int_{\Omega} \boldsymbol{\sigma} : grad \boldsymbol{\hat{u}} -  \boldsymbol{b} \cdot \boldsymbol{\hat{u}} +  \rho\ddot{\boldsymbol{u}} \cdot \boldsymbol{\hat{u}}  dV - \int_{\partial \Omega_{\sigma}} \boldsymbol{\overline{t}} \cdot \boldsymbol{\hat{u}} ds = 0 
 \end{equation}
 
-A função de teste $ \hat{u} $ tem um significado especial no principio dos trabalhos virtuais. Ela é chamada de deslocamentos virtuais e forma trabalhos virtuais quando associadas às forças internas e externas. A identificação dos termos da forma fraca, de acordo com o princípio dos trabalhos virtuais, é feita a seguir.
+De acordo com \cite{Paulo} a função de teste $ \hat{u} $ tem um significado especial no principio dos trabalhos virtuais. Ela é chamada de deslocamentos virtuais e forma trabalhos virtuais quando associada às forças internas e externas. A identificação dos termos da forma fraca, de acordo com o princípio dos trabalhos virtuais, é feita a seguir.
 \begin{itemize}
 	\item Trabalho virtual interno
 	\begin{equation}
@@ -137,7 +140,7 @@ A função de teste $ \hat{u} $ tem um significado especial no principio dos tra
 	\end{equation}
 \end{itemize}
 
-Antes de partir para a solução da forma fraca é preciso esclarecer se ela é válida para resolver a forma forte. Pelo lema fundamental do cálculo variacional o seguinte é válido:\\
+Antes de partir para a solução da forma fraca, é preciso esclarecer se ela é válida para resolver a forma forte. Pelo lema fundamental do cálculo variacional:\\
 Dada uma função $ f(x) $ contínua, se
 \begin{equation}
 \int_{a}^{b} f(x) h(x) dx = 0
@@ -153,15 +156,15 @@ A partir de \ref{eq:formafraca1}, reduzindo a equação para a forma unidimensio
 
 \subsection{A Discretização no espaço}
 
-Para resolver a forma fraca é necessário discretizar o domínio no espaço. A descrição em uma dimensão será usada, todavia os conceitos apresentados são iguais independente de quantas dimensões são usadas. A forma mais enxuta foi escolhida por ser também a mais simples. O domínio representado pelo conjunto (a,b) é contínuo e portanto infinito. É interessante dividir este domínio em regiões menores, de forma que.
+Para resolver a forma fraca é necessário discretizar o domínio no espaço. A descrição em uma dimensão será usada, todavia os conceitos apresentados são iguais independente de quantas dimensões são empregadas. O domínio representado pelo conjunto (a,b) é contínuo, portanto de acordo com \cite{Paulo} tem dimensão infinita. Este deve ser dividido em regiões menores, de forma que.
 \begin{equation} \label{eq:malha1d}
 	x_1 = a \quad x_i<x_{i+1} \quad e \; x_N = b
 \end{equation}
 
-Em uma dimensão cada intervalo de $ x_i $  a $ x_{i+1} $ define um elemento do domínio. A soma de todos os elementos, em conjunto com o contorno, compõe o domínio do problema que agora passa a ser finito. Os pontos $ x_i $ são chamados de nós e a união entre elementos e nós forma uma malha. \\
+Em uma dimensão cada intervalo de $ x_i $  a $ x_{i+1} $ define um elemento do domínio. A soma de todos os elementos, em conjunto com o contorno, compõe o domínio do problema que agora é finito. Os pontos $ x_i $ são chamados de nós, e a união entre elementos e nós forma uma malha. \\
 
 A aproximação das funções $ u(x,t) \; e \; \hat{u}(x,t) $ é feita da seguinte maneira.
-\begin{align} \label{eq:formafracalin}
+\begin{align} 
 	u(x,t) \approx u_h(x,t) = \sum_{n=1}^{N} \phi_n (x) u_n(t) \\
 	\hat{u}(x,t) \approx \hat{u}_h(x) = \sum_{m=1}^{N} \phi_m (x) \hat{u}_m  
 \end{align}
@@ -186,10 +189,10 @@ De acordo com \cite{zienkiewicz2013} considerando a malha expressa por \ref{eq:m
     \fonte{\cite{zienkiewicz2013}}
 \end{figure}
 
-A figura \ref{fig:funcform} mostra as funções definidas em \ref{eq:funcform}, de acordo com \cite{zienkiewicz2013} estas funções são pertencentes ao conjunto $C0$, portanto são simplesmente contínuas. Observe que as derivadas são apenas contínuas por partes.
+A figura \ref{fig:funcform} mostra as funções definidas em \ref{eq:funcform}. De acordo com \cite{zienkiewicz2013} estas funções são pertencentes ao conjunto $C0$, portanto são simplesmente contínuas. Sendo assim, suas derivadas são apenas contínuas por partes.
 
-Considerando que o modelo constitutivo é a lei de Hooke, que o corpo tem coeficiente de Poisson nulo e que cargas superficiais não estão presentes. A forma fraca unidimensional é descrita da seguinte forma.\footnote{Considerar Poisson nulo, neste caso, permite que exista apenas a componente $ \sigma_x $} \footnote{De acordo com a lei de Hooke $ \sigma_x = E \varepsilon_x = E \frac{\partial u}{ \partial x} $}
-\begin{equation}
+De acordo com \cite{zienkiewicz2013}. ao considerar que o modelo constitutivo é a lei de Hooke, que o corpo tem coeficiente de Poisson nulo e que cargas superficiais não estão presentes. A forma fraca unidimensional é descrita da seguinte forma.\footnote{Considerar Poisson nulo, neste caso, permite que exista apenas a componente $ \sigma_x $} \footnote{De acordo com a lei de Hooke $ \sigma_x = E \varepsilon_x = E \frac{\partial u}{ \partial x} $}
+\begin{equation} \label{eq:formafracalin}
     \int_{\Omega} \hat{u} (\rho \ddfrac{\partial^2 u}{\partial t^2} - b_x) \, dx + \int_{\Omega} \ddfrac{\partial \hat{u}}{\partial x} E \ddfrac{\partial u}{ \partial x} \,  dx
 \end{equation}
 
@@ -199,7 +202,7 @@ De acordo com \cite{zienkiewicz2013}  as integrais no domínio do corpo podem se
     \int_{\Omega} (\cdot) \, dx = \sum_{i = 1}^{N_{el}} \int_{x_i}^{x_{i+1}} (\cdot) \, dx \equiv \sum_{e} \int_{\Omega_e} (\cdot) dx
 \end{equation}
 
-Onde $ N_{el} $ significa o número de elementos e $\sum_e$ é um somatório que compreende todos os elementos. A última integral em \ref{eq:integraisdif} mostra que é possível iterar cada elemento, fazendo com que a integral seja uma soma das participações elementares. O autor de um dos maiores softwares código aberto em elementos finitos, autor de  \cite{BangerthHartmannKanschat2007}, afirma em uma de suas videoaulas que a capacidade de tratar de forma igualitária cada elemento é uma das maiores vantagens computacionais do método dos elementos finitos.\footnote{O sitio para acesso das videoaulas é \url{https://www.math.colostate.edu/~bangerth/videos.html}} \\
+Onde $ N_{el} $ é o número de elementos, e $\sum_e$ é um somatório que compreende todos os elementos. A última integral em \ref{eq:integraisdif} mostra que é possível calcular a participação de cada elemento, desta forma a integral no domínio é a soma das participações dos elementos. O criador de um dos maiores softwares de código aberto em elementos finitos, autor de  \cite{BangerthHartmannKanschat2007}, afirma em uma de suas videoaulas que a capacidade de tratar de forma igualitária cada elemento é uma das maiores vantagens computacionais do método dos elementos finitos.\footnote{O sitio para acesso das videoaulas é \url{https://www.math.colostate.edu/~bangerth/videos.html}} \\
 
 \begin{figure}
     \centering
@@ -209,7 +212,7 @@ Onde $ N_{el} $ significa o número de elementos e $\sum_e$ é um somatório que
     \fonte{\cite{zienkiewicz2013}}
 \end{figure}
 
-De acordo com \cite{zienkiewicz2013} todos os elementos ou intervalos $ [x_i, x_{i+1}] $ presentes na figura \ref{fig:funcformverd} usam as mesmas funções $ N_1 $  e $ N_2 $ para sua definição, portanto estas são chamadas funções de forma para o elemento. Um elemento é chamado de linear ou quadrático quando suas funções de forma são lineares ou quadráticas e assim por diante. Caso tal descrição fosse feita em duas ou três dimensões mudaria apenas o número de funções de forma para um determinado elemento. As seguintes propriedades das funções de aproximação são válidas e necessárias, de acordo com \cite{Paulo}.
+De acordo com \cite{zienkiewicz2013} todos os elementos ou intervalos $ [x_i, x_{i+1}] $ presentes na figura \ref{fig:funcformverd} usam as mesmas funções $ N_1 $  e $ N_2 $ para sua definição, portanto estas são chamadas funções de forma para o elemento. Um elemento é chamado de linear ou quadrático quando suas funções de forma são lineares ou quadráticas e assim por diante. As seguintes propriedades são válidas e necessárias para as funções de aproximação, que dentro de um elemento são chamadas de função de forma, de acordo com \cite{Paulo}.
 
 \begin{itemize}
     \item Uma função associada a um certo nó $ i $ é nula em todos os outros nós da malha.
@@ -219,36 +222,36 @@ De acordo com \cite{zienkiewicz2013} todos os elementos ou intervalos $ [x_i, x_
     \end{equation} um conjunto de funções que satisfazem essa propriedade são ditas partição da unidade. 
 \end{itemize}
 
-Aproveitando o tratamento em cada elemento é interessante criar um sistema de coordenadas local, onde
+Dado que a integral é feita em cada elemento  um sistema de coordenadas locais é inserido, nele
 \begin{equation}
     x' =  x - x^e_1 
 \end{equation}
 
-na qual $ x^e_1 $ é a coordenada do primeiro nó de um elemento $e $. Aproveitando deste sistema de coordenadas e usando as funções de forma. As aproximações dos campos de deslocamento e de deslocamento virtual podem ser escritas da seguinte maneira
+na qual $ x^e_1 $ é a coordenada do primeiro nó de um elemento $e $, $x$ é a coordenada global e $x'$ a coordenada local. De acordo com \cite{zienkiewicz2013}, ao aplicar o sistema de coordenadas local nas funções de forma. As aproximações dos campos de deslocamento e de deslocamento virtual são escritas da seguinte maneira
 
 \begin{align}
     u_h^e = N_1(x')u_1^e + N_2(x')u_2^e \\
     \hat{u}_h^e = N_1(x')\hat{u}_1^e + N_2(x')\hat{u}_2^e
 \end{align}
 
-Onde $ u^e_i $ e $ \hat{u}^e_i $ é o resultado do respectivo campo $ u $ ou $ \hat{u} $ no nó $ i $ do elemento $ e $. Usando estas aproximações na forma unidimensional fraca apresentada em \ref{eq:formafracalin}, manipulando os termos de forma apropriada e separando a participação de acordo com a origem energética de sua contribuição são formados as seguintes expressões
+Onde $ u^e_i $ e $ \hat{u}^e_i $ é a aproximação do respectivo campo $ u $ ou $ \hat{u} $ no nó $ i $ do elemento $ e $. Ao aplicar estas aproximações na forma fraca apresentada em \ref{eq:formafracalin}, seguida da separação dos termos de acordo com sua contribuição energética. De acordo com \cite{zienkiewicz2013}, são formadas as seguintes expressões
 
 \begin{itemize}
-    \item Termo do elemento relacionado à inercia: \begin{equation}
+    \item Termo relacionado à inercia: \begin{equation}
         \sum_{e=1}^M [\hat{u}^e_1 \, \hat{u}^e_2 ] \int_{\Omega_e} \begin{Bmatrix} N_1 \\ N_2 \end{Bmatrix} \rho \begin{Bmatrix} N_1 & N_2 \end{Bmatrix} \; dx' \begin{Bmatrix} \ddot{u}^e_1 \\ \ddot{u}^e_2 \end{Bmatrix}
     \end{equation}
     
-    \item Termo do elemento relacionado à tensão interna \begin{equation}
+    \item Termo relacionado à tensão interna \begin{equation}
         \sum_{e=1}^M [\hat{u}^e_1 \, \hat{u}^e_2 ] \int_{\Omega_e} \begin{Bmatrix} \ddfrac{dN_1}{dx'} \\ \ddfrac{dN_2}{dx'}  \end{Bmatrix} E \begin{Bmatrix} \ddfrac{dN_1}{dx'}  & \ddfrac{dN_2}{dx'}  \end{Bmatrix} \; dx' \begin{Bmatrix} u^e_1 \\ u^e_2 \end{Bmatrix}
     \end{equation}
     
-    \item Termo do elemento relacionado às forças de corpo: 
+    \item Termo relacionado às forças de corpo: 
     \begin{equation}
         \sum_{e=1}^M [\hat{u}^e_1 \, \hat{u}^e_2 ] \int_{\Omega_e} \begin{Bmatrix} N_1 \\ N_2  \end{Bmatrix} b_x \; dx'
     \end{equation}
 \end{itemize}
 
-Avaliando as integrais são obtidas as matrizes e os vetores que em conjunto com os deslocamentos reais e virtuais formam o sistema algébrico a ser resolvido. Computar as integrais apresentadas aqui é trivial, já que as expressões foram extremamente simplificadas. Em um problema com duas ou três dimensões calcular analiticamente as integrais formadas não é factível. A implementação de integrações analíticas em um programa computacional é por si um problema, portanto as integrais formadas são normalmente calculadas por meio de integrações numéricas chamadas de quadraturas.\footnote{A quadratura mais usada é a de Gauss-Legendre, explicações sobre as quadraturas e suas peculiaridades são encontradas em \cite{Paulo} e \cite{zienkiewicz2013}} Diante de tal consideração são apresentadas as matrizes de massa e rigidez e o vetor de forças de corpo, que são resultado do cálculo previamente citado. 
+Avaliando as integrais dos termos acima são obtidas matrizes e vetores pertencentes ao elemento $e$. Computar as integrais apresentadas aqui é trivial, já que as expressões foram extremamente simplificadas. Em um problema com duas ou três dimensões calcular analiticamente as integrais formadas não é factível. De acordo com \cite{zienkiewicz2013} o cálculo das integrais frmadas é feito usando integrações numéricas chamadas de quadraturas.\footnote{A quadratura mais usada é a de Gauss-Legendre, explicações sobre as quadraturas e suas peculiaridades são encontradas em \cite{Paulo} e \cite{zienkiewicz2013}} As matrizes de massa e rigidez, assim como o vetor de forças de corpo são resultados do cálculo das integrais previamente citadas. 
 
 \begin{itemize}
     \item Matriz de massa do elemento : \begin{equation} \boldsymbol{M}^e = \int_{\Omega_e} \begin{Bmatrix} N_1 \\ N_2 \end{Bmatrix} \rho \begin{Bmatrix} N_1 & N_2 \end{Bmatrix} \; dx' = \begin{bmatrix} M^e_{11} & M^e_{12} \\ M^e_{21} & M^e_{22} \end{bmatrix} \end{equation} 
@@ -262,7 +265,7 @@ Avaliando as integrais são obtidas as matrizes e os vetores que em conjunto com
     \end{equation}
 \end{itemize}
 
-Agora usando uma notação mais compacta, sabendo que  $ \hat{u} \neq 0 $ e somando todas as participações dos elementos o sistema assume sua forma final.
+ De acordo com \cite{Paulo} ao considerar que  $ \hat{u} \neq 0 $, além disso somando todas as participações dos elementos. O sistema torna-se uma equação algébrica, vide equação \ref{eq:formafindiscesp}.
 
 \begin{equation} \label{eq:formafindiscesp}
     \boldsymbol{M \ddot{u} } + \boldsymbol{Ku} = \boldsymbol{F}
@@ -270,18 +273,18 @@ Agora usando uma notação mais compacta, sabendo que  $ \hat{u} \neq 0 $ e soma
 
 Sendo $ \boldsymbol{M} $ e $ \boldsymbol{K} $ as matrizes de massa e rigidez, $\boldsymbol{F}$ o vetor de forças de corpo, $ \boldsymbol{\ddot{u}} $ o vetor das acelerações nodais e $\boldsymbol{u}$ o vetor de deslocamentos nodais.\\
 
-O sistema algébrico \ref{eq:formafindiscesp} é a forma final da discretização espacial. A alteração de uma para duas ou três dimensões não traria qualquer alteração a este sistema final. Caso um modelo constitutivo não linear fosse usado o sistema sofreria alteração, gerando um processo iterativo de solução. Mesmo havendo mudança no processo de solução pela adição de um modelo não linear os conceitos básicos permanecem os mesmo.
+A equação algébrica \ref{eq:formafindiscesp} é a forma final da discretização espacial de um sistema linear.
 
 \subsubsection{A discretização de um problema dinâmico}
 
-A discretização de um problema dinâmico tem algumas particularidades a serem consideradas. Uma delas é chamada de trancamento ou em inglês "Locking". Este fenômeno se manifesta em elementos lineares contendo todos os pontos de integração, estes pontos são oriundos da integração numérica usada na solução. O trancamento se manifesta através de um excesso de rigidez na malha, por conseguinte os deslocamentos são subestimados e o resultado é fisicamente inválido. \\
+A discretização de um problema dinâmico tem algumas particularidades a serem consideradas. Uma delas é chamada de trancamento ou em inglês "Locking". De acordo com \cite{Paulo} o trancamento é observado em elementos lineares contendo todos os pontos de integração, estes pontos são oriundos da integração numérica usada na solução. O trancamento se manifesta através de um excesso de rigidez na malha, por conseguinte os deslocamentos são subestimados e o resultado é fisicamente inválido. \\
 
-A técnica de integração numérica mais usada é a quadratura de Gauss-Legendre. A explicação completa da integração numérica não será feita, pois seria necessário se estender de maneira indesejada. Uma explicação generalista é que para aproximar a integral de um polinômio de forma exata são necessários $ np $ pontos localizados de acordo com a quadratura usada. Um polinômio de grau $p$ necessita de $np$ número de pontos em sua integração para ser integrado de forma exata, de acordo com a equação \ref{eq:quadratu}. 
+A técnica de integração numérica mais usada é a quadratura de Gauss-Legendre. Um polinômio de grau $p$ necessita de $np$ pontos em sua integração para ser integrado de forma exata, de acordo com a equação \ref{eq:quadratu}. 
 \begin{equation} \label{eq:quadratu}
     P=2np-3
 \end{equation}
 
-Veja que de acordo com \cite{Paulo} são necessários oito pontos para integrar exatamente um elemento hexaédrico de oito nós, representado na figura \ref{fig:hexaoito}. Este elemento usa funções lineares semelhantes às funções apresentadas no exemplo unidimensional, porém sua dimensão faz com que estejam presentes funções de grau 2. Os pontos de integração estão representados na figura  \ref{fig:hexapontos}. \\
+De acordo com \cite{Paulo} são necessários oito pontos para integrar exatamente um elemento hexaédrico de oito nós, representado na figura \ref{fig:hexaoito}. Este elemento usa funções lineares semelhantes às funções apresentadas no exemplo unidimensional, porém sua dimensão faz com que estejam presentes funções de grau 2 na integral do elemento. Os pontos de integração estão representados na figura  \ref{fig:hexapontos}. \\
 \begin{figure}
 \caption{Elemento hexaédrico de oito nós e seus pontos de integração.}
 
@@ -299,8 +302,9 @@ Veja que de acordo com \cite{Paulo} são necessários oito pontos para integrar 
 
 \fonte{ \url{http://web.mit.edu/calculix_v2.7/CalculiX/ccx_2.7/doc/ccx/node26.html}}
 \end{figure}
+%CONTINUAR REVISAO%
 
-Integrar completamente os elementos lineares pode gerar trancamento, como foi citado anteriormente. Além disso o custo computacional é extremamente alto, dado que malhas com elementos muito pequenos são necessárias para a correta solução de um problema dinâmico envolvendo por exemplo um impacto balístico. A solução encontrada é uma técnica chamada subintegração. Ela consiste em usar menos pontos de integração do que seriam necessários para o elemento. No caso dinâmico é costumeiro usar apenas um ponto e este é localizado no centro do elemento. De acordo com \cite{theorymanls} os elementos com um ponto de integração são 25 vezes menos custosos em termos computacionais, em relação aos totalmente integrados. Embora a subintegração diminua o custo computacional e resolva o trancamento ela não é a solução perfeita, já que este tipo de técnica tem problemas colaterais associados a seu uso. \par
+A integração completa, ou seja integrar usando todos os pontos provenientes da quadratura, de elementos lineares pode gerar trancamento. Além disso, o custo computacional deste tipo de integração é extremamente alto, dado que malhas com elementos muito pequenos são necessárias para a correta solução de um problema de impacto balístico. A solução encontrada é uma técnica chamada subintegração. Ela consiste em usar menos pontos de integração do que seriam necessários para o elemento. No caso dinâmico é costumeiro usar apenas um ponto e este é localizado no centro do elemento. De acordo com \cite{theorymanls} os elementos com um ponto de integração são 25 vezes menos custosos em termos computacionais, em relação aos totalmente integrados. Embora a subintegração diminua o custo computacional e resolva o trancamento ela não é a solução perfeita, já que este tipo de técnica tem problemas colaterais associados a seu uso. \par
 
 Os problemas gerados pela subintegação são a representação da tensão como um tensor constante no elemento e o surgimento de modos espúrios de deformação. A representação da tensão como constante não é um grande problema, já que um refino de malha é suficiente para sua solução. Os modos espúrios de deformação causam muito mais dor de cabeça ao analista. O que acontece é que os elementos se deformam sem gastar energia e com isso geram ruídos na energia total do sistema, portanto é necessário controla-los. Estes modos espúrios de deformação são chamados de ampulheta ou "Hourglass". O nome ampulheta se dá por conta do formato assumido pelo conjunto de dois elementos quando estão se deformando em modo espúrio, vide figura \ref{fig:hourglass}. 
 
