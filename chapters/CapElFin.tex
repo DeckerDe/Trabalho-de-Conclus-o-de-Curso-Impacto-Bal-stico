@@ -44,7 +44,7 @@ As condições de contorno são aplicadas no ou nos contornos do corpo. Observa-
 	u = \overline{u} \quad \forall \; \boldsymbol{x} \; \in  \partial \Omega_u
 \end{equation}
 
-Onde \gls{u} é o campo vetorial de deslocamentos do corpo. Uma consideração a ser feita é o impacto numérico das condições de contorno essenciais. O método dos elementos finitos resulta em uma equação algébrica a ser resolvida. No caso de sistemas mecânicos estáticos e lineares a seguinte equação algébrica é o resultado do método:
+Onde \gls{u} é o campo vetorial de deslocamentos do corpo. Uma consideração a ser feita é o impacto numérico das condições de contorno essenciais. O método dos elementos finitos resulta em uma equação algébrica a ser resolvida. No caso de sistemas mecânicos estáticos e lineares a seguinte equação algébrica é o resultado da aplicação do método:
 \begin{equation}
     \boldsymbol{K} \boldsymbol{U} = \boldsymbol{F} 
 \end{equation}
@@ -302,11 +302,10 @@ De acordo com \cite{Paulo} são necessários oito pontos para integrar exatament
 
 \fonte{ \url{http://web.mit.edu/calculix_v2.7/CalculiX/ccx_2.7/doc/ccx/node26.html}}
 \end{figure}
-%CONTINUAR REVISAO%
 
-A integração completa, ou seja integrar usando todos os pontos provenientes da quadratura, de elementos lineares pode gerar trancamento. Além disso, o custo computacional deste tipo de integração é extremamente alto, dado que malhas com elementos muito pequenos são necessárias para a correta solução de um problema de impacto balístico. A solução encontrada é uma técnica chamada subintegração. Ela consiste em usar menos pontos de integração do que seriam necessários para o elemento. No caso dinâmico é costumeiro usar apenas um ponto e este é localizado no centro do elemento. De acordo com \cite{theorymanls} os elementos com um ponto de integração são 25 vezes menos custosos em termos computacionais, em relação aos totalmente integrados. Embora a subintegração diminua o custo computacional e resolva o trancamento ela não é a solução perfeita, já que este tipo de técnica tem problemas colaterais associados a seu uso. \par
+Integrar elementos lineares de forma completa, usando todos os pontos de integração da quadratura, pode gerar trancamento. Além disso, o custo computacional deste tipo de integração é alto, dado que malhas com elementos muito pequenos são necessárias para resolver um problema de impacto balístico. A solução encontrada, tanto para o trancamento quanto para o custo computacional elevado, é uma técnica chamada subintegração. Ela consiste em usar menos pontos de integração do que seriam necessários para o elemento. No caso dinâmico é costumeiro usar apenas um ponto, sendo ele localizado no centro do elemento. De acordo com \cite{theorymanls} os elementos com um ponto de integração são 25 vezes menos custosos em termos computacionais se comparados aos elementos completamente integrados. Embora a subintegração diminua o custo computacional e resolva o trancamento, ela acarreta efeitos colaterais negativos. \par
 
-Os problemas gerados pela subintegação são a representação da tensão como um tensor constante no elemento e o surgimento de modos espúrios de deformação. A representação da tensão como constante não é um grande problema, já que um refino de malha é suficiente para sua solução. Os modos espúrios de deformação causam muito mais dor de cabeça ao analista. O que acontece é que os elementos se deformam sem gastar energia e com isso geram ruídos na energia total do sistema, portanto é necessário controla-los. Estes modos espúrios de deformação são chamados de ampulheta ou "Hourglass". O nome ampulheta se dá por conta do formato assumido pelo conjunto de dois elementos quando estão se deformando em modo espúrio, vide figura \ref{fig:hourglass}. 
+Os efeitos gerados pela subintegação são: A representação da tensão como um tensor constante no elemento, e o surgimento de modos espúrios de deformação. A representação da tensão como constante pode ser resolvida pelo refino da malha. Nos modos espúrios de deformação os elementos se deformam sem gastar energia. Estas deformações geram ruídos na energia total do sistema, portanto é necessário controla-las. Os modos espúrios de deformação são chamados de ampulheta ou em inglês "Hourglass". O nome ampulheta se dá por conta do formato assumido pelo conjunto de dois elementos quando estão se deformando neste modo, vide figura \ref{fig:hourglass}. 
 
 \begin{figure}
     \centering
@@ -318,23 +317,24 @@ Os problemas gerados pela subintegação são a representação da tensão como 
 
 \subsection{A discretização no tempo}
 
-A equação algébrica \ref{eq:formafindiscesp} está discretizada no espaço, porém note que não foi feita qualquer consideração quanto ao tempo. É necessário discretizar esta equação no tempo e isso é feito usando um método de marcha. De acordo com \cite{Paulo} este nome vem do fato de que o tempo é subdividido em intervalos e um algoritmo passa por cada um deles de forma sequencial. O intervalo de tempo considerado é $[t_0,t_f] $ . A marcha ocorrerá de forma a passar por um intervalo $ \Delta t $ a cada iteração, sendo $ t_1 = t_0 + \Delta t $, $ t_2 = t_0 + 2 \Delta t = t_1 + \Delta t $ e assim por conseguinte. Existem dois grupos de métodos usados para realizar esta marcha no tempo, são eles implícitos e explícitos. \\
+A equação algébrica \ref{eq:formafindiscesp} está discretizada no espaço, porém o evento de impacto balístico ocorre ao longo de um intervalo de tempo. Portanto, é necessário discretizar a equação \ref{eq:formafindiscesp} no tempo, e isso é feito usando um método de marcha. De acordo com \cite{Paulo} este nome vem do fato de que o tempo é subdividido em intervalos, e um algoritmo passa por cada um deles de forma sequencial. O intervalo de tempo considerado é $[t_0,t_f] $ . A marcha ocorre de forma que cada passo avança uma porção de tempo $ \Delta t $, sendo $ t_1 = t_0 + \Delta t $, $ t_2 = t_0 + 2 \Delta t = t_1 + \Delta t $ e assim por conseguinte. Existem dois grupos de métodos usados para realizar esta marcha no tempo, são eles os implícitos e os explícitos. \\
 
-A escolha entre os métodos leva em consideração o comportamento esperado da solução, que pode ser classificado de acordo com o formato da equação diferencial resolvida. De acordo com \cite{BangerthHartmannKanschat2007} a equação de onda é classificada como hiperbólica, logo não é esperada a atenuação da curva descrita pela variável essencial. Um impacto em alta velocidade excita frequências altas dos corpos envolvidos, assim é necessário que o passo de tempo seja pequeno para que as influências destas faixas de frequência sejam corretamente computadas. O custo computacional de cada $\Delta t$ em um método implícito é muito mais alto do que em um método explícito, no entanto estes métodos são incondicionalmente estáveis. Dizer que o método é incondicionalmente estável significa que é possível usar passos de tempo tão grandes quanto desejado. Em um método condicionalmente estável há uma limitação quanto ao passo usado, nestes é preciso reduzir o $ \Delta t $ de acordo com a equação \ref{eq:defdeltat}. Onde $l$ é a menor dimensão de um elemento da malha, $c$ é a velocidade do som no material e $k$ é um fator de estabilidade que normalmente varia entre 0.6 e 0.9. \\
+A escolha entre os métodos leva em consideração o comportamento esperado da solução, que pode ser classificado de acordo com o formato da equação diferencial resolvida. De acordo com \cite{hiermaier_2008} a equação de onda é classificada como hiperbólica. De acordo com \cite{BangerthHartmannKanschat2007}, em uma equação hiperbólica, não é esperada a atenuação da curva descrita pela variável essencial. Além disso, um impacto em alta velocidade excita frequências altas dos corpos envolvidos, portanto é necessário que o passo de tempo seja pequeno para que as influências destas faixas de frequência sejam corretamente computadas. \\
 
+O custo computacional de cada $\Delta t$ em um método implícito é muito mais alto do que em um explícito, no entanto os implícitos são incondicionalmente estáveis. De acordo com \cite{Paulo}, método é incondicionalmente estável é aquele onde é possível usar passos de tempo tão grandes quanto desejado. Em um método condicionalmente estável há uma limitação quanto ao passo usado, nestes é preciso reduzir o $ \Delta t $ de acordo com a equação \ref{eq:defdeltat}. Onde $l$ é a menor dimensão de um elemento da malha, $c$ é a velocidade do som no material e $k$ é um fator de estabilidade que normalmente varia entre 0.6 e 0.9. \\
 
-Para o caso de impactos balísticos, que envolvem velocidades relativamente altas, os métodos explícitos são mais interessantes. Conforme \cite{Zukas} o uso de grandes passos de tempo faz com que detalhes da solução sejam perdidos, logo não seria possível extrair benefício da estabilidade incondicional dos métodos implícitos e métodos explícitos são preferidos por seu custo inferior. \\
+A escolha do tipo de método aplicado leva em consideração o comportamento da solução. Para o caso de impactos balísticos, que envolvem velocidades relativamente altas, os métodos explícitos são mais interessantes. Conforme \cite{Zukas} o uso de grandes passos de tempo faz com que detalhes da solução sejam perdidos, logo não seria possível extrair benefício da estabilidade incondicional dos métodos implícitos.\\
 
 \begin{equation}
 \Delta t = \frac{k l }{c}
 \label{eq:defdeltat}
 \end{equation}
 
-A equação \ref{eq:formafindiscesp} é escrita da seguinte forma
+Ao considerar que a equação \ref{eq:formafindiscesp} resolve o sistema em um determinado tempo $t_n$, ela é escrita da seguinte forma
     \begin{equation} \label{eq:formainicialdisctempo}
     \boldsymbol{M \ddot{u}_n } + \boldsymbol{K}\boldsymbol{u}_n = \boldsymbol{F}_n
 \end{equation}
-Onde $ u_n $ é o deslocamento em $t=n$, portanto a equação \ref{eq:formainicialdisctempo} descreve o sistema em um determinado tempo $t_n $. È necessário que todos os valores sejam conhecidos em e até $ t_n $. As condições iniciais são usadas para caracterizar o sistema em $ t_0 $. Para avançar no tempo o método das diferenças centrais toma a velocidade média em cada intervalo da seguinte forma
+Onde $ u_n $ é o deslocamento em $t=t_n$, portanto a equação \ref{eq:formainicialdisctempo} descreve o sistema em um determinado tempo $t_n $. De acordo com \cite{Paulo} é necessário que todos os valores sejam conhecidos em $t_n$ e até $ t_n $. A função das condições iniciais é de caracterizar o sistema em $ t_0 $, portanto $n=0$. De acordo com \cite{Paulo} o método explícito mais usado é o das diferenças centrais, o mesmo é dito por \cite{theorymanls}. Para avançar no tempo o método das diferenças centrais toma a velocidade média em cada intervalo da seguinte forma.
 
 \begin{align} \label{eq:vels}
     \dot{u}_{n-\frac{1}{2}} \approx \ddfrac{u_n - u_{n-1}}{\Delta t} & \hspace{25mm} \text{e} & \dot{u}_{n+\frac{1}{2}} \approx \ddfrac{ u_{n+1} + u_n}{\Delta t} 
@@ -352,9 +352,11 @@ Agora substituindo \ref{eq:acels} em \ref{eq:formainicialdisctempo} a seguinte e
     \ddfrac{1}{\Delta t^2}\boldsymbol{M} \boldsymbol{u_{n+1}} = [\boldsymbol{F}_n - \boldsymbol{Ku}_n + \ddfrac{1}{\Delta t^2}\boldsymbol{M}(2\boldsymbol{u}_n - \boldsymbol{u}_{n-1}) ]
 \end{equation}
 
-Para transformar \ref{eq:formaquasefimdisctempo} em sua forma explícita é necessário realizar o procedimento de diagonalização da matriz de massa, que faz com que todos os termos sejam transferidos para a diagonal principal. De acordo com \cite{Paulo} este procedimento implica perda de informação, o que gera erros adicionais de aproximação. Porém para que o procedimento de diagonalização seja válido se faz necessário que a massa de cada elemento seja conservada. Depois da diagonalização a equação \ref{eq:formaquasefimdisctempo} assume sua forma final e por sua vez explícita, já que de acordo com \cite{Paulo} não há necessidade de se resolver um sistema algébrico.
+Para transformar \ref{eq:formaquasefimdisctempo} em sua forma explícita é necessário realizar o procedimento de diagonalização da matriz de massa, que faz com que todos os termos sejam transferidos para a diagonal principal. De acordo com \cite{Paulo} este procedimento implica perda de informação, o que gera erros adicionais de aproximação. Porém, ainda de acordo com \cite{Paulo} para que o procedimento de diagonalização seja válido é necessário que a massa de cada elemento seja conservada. Depois da diagonalização a equação \ref{eq:formaquasefimdisctempo} assume sua forma final. De acordo com \cite{Paulo} esta forma é chamada explícita pois não há necessidade de se resolver um sistema algébrico.
 
-\begin{equation}
-    u^j_{n+1} = (\ddfrac{M_{jj}}{\Delta t^2} )^-1 [F_n^j - (Ku_n)^j + \ddfrac{1}{\Delta t^2}M_{jj}(2u_n^j - u_{n-1}^j) + \ddfrac{1}{2 \Delta t}C u_{n-1}]
+\begin{equation} \label{eq:discretitempofinal}
+    u^j_{n+1} = (\ddfrac{M_{jj}}{\Delta t^2} )^-1 [F_n^j - (Ku_n)^j + \ddfrac{1}{\Delta t^2}M_{jj}(2u_n^j - u_{n-1}^j)]
 \end{equation}
 
+
+A equação \ref{eq:discretitempofinal} é muito semelhante à equação resolvida por um programa de elementos finitos, quando um impacto balístico é considerado. A diferença está na linearidade do material, portanto no termo $(Ku_n)^j$. Em um material não linear este termo seria escrito de forma ligeiramente diferente. De acordo com \cite{Paulo} em casos não lineares ele é escrito como $f^j_n$ e representa o vetor força interna do material. \\
