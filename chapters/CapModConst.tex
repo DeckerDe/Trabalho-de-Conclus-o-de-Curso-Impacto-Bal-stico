@@ -16,12 +16,12 @@ De acordo com \cite{Holzapfel} as variáveis internas não podem ser mensuradas 
 
 As propriedades dos materiais podem apresentar grandes diferenças quando diferentes taxas de deformação são aplicadas. No extremo inferior da taxa de deformação a fadiga pode estar presente caso as condições de temperatura e carga sejam propicias. No extremo superior, a solicitação de materiais devido à explosões faz com que a resistência do material possa ser completamente ignorada, quando estes eventos são simulados. Este trabalho busca apresentar os modelos constitutivos inseridos no contexto de impactos de media velocidade. Por média velocidade entende-se que os impactos não levam o material ao estado de choque. De acordo com \cite{Zukas} este tipo de impacto são são aqueles onde a velocidade do projetil não supera os $2000 m/s$. De acordo com \cite{Hazell} a velocidade limítrofe para o inicio da observação de ondas de choque depende do material impactado, elas surgem quando a velocidade de penetração supera a velocidade do som no meio. \par
 
-%CONTINUAR REVISAO VER COMO HIERMAIER INSERE A PALST COMP
-Quando não há presença de ondas de choque, o material pode ser modelado apenas por uma relação constitutiva ou por uma relação constitutiva e uma equação de estado, além disso equações de estado muito mais simples podem ser usadas neste tipo de situação. De acordo com \cite{hiermaier_2008} a plasticidade computaciona \\
+
+Quando não há presença de ondas de choque, o material pode ser modelado apenas por uma relação constitutiva ou por uma relação constitutiva e uma equação de estado, além disso equações de estado muito mais simples podem ser usadas neste tipo de situação. De acordo com \cite{hiermaier_2008} a plasticidade computacional oferece base teórica para os modelos constitutivos usados na balística. \\
 
 \section{Plasticidade perfeita, isotrópica e cinemática.}
 
-De acordo com \cite{neto_peric_owens_2008} existem três comportamentos quando se fala em modelos de plasticidade. 
+De acordo com \cite{neto_peric_owens_2008} quando um corpo se deforma plasticamente ele pode apresentar, um ou uma mistura destes três tipos de plasticidade. 
 \begin{itemize}
     \item Plasticidade perfeita.
     \item Plasticidade Isotrópica
@@ -29,7 +29,7 @@ De acordo com \cite{neto_peric_owens_2008} existem três comportamentos quando s
 \end{itemize}
 \par
 
-A plasticidade perfeita é caracterizada pela estabilidade da tensão de escoamento. Nela o material escoa sem aumentar a resistência a futuros escoamentos. Uma curva de carga e descarga representando a plasticidade perfeita pode ser vista na figura \ref{fig:plastperf}. Veja que não há alteração da tensão de escoamento, não importando a quantidade de deformação que o material sofra. \\ 
+A plasticidade perfeita é caracterizada pela estabilidade da tensão de escoamento. Nela o material escoa sem aumentar a resistência a futuras deformações plásticas. Uma curva de carga e descarga que apresenta plasticidade perfeita pode ser vista na figura \ref{fig:plastperf}. Não há alteração da tensão de escoamento, tal comportamento independe da quantidade de deformação que o material sofre. \\ 
 \begin{figure}[H]
     \centering
     \caption{Curva de tensão deformação apresentando plasticidade perfeita. }
@@ -38,7 +38,8 @@ A plasticidade perfeita é caracterizada pela estabilidade da tensão de escoame
     \fonte{O autor (2020)}
 \end{figure}
 
-O segundo comportamento típico é a plasticidade isotrópica, nela a tensão limite de escoamento sobe a medida que o material sofre deformação plástica. O característico da plasticidade isotrópica é que a resistência ao escoamento tem o mesmo valor, em módulo, tanto em tração quanto em compressão, portanto um acréscimo na tensão limite de escoamento em tração também significa um acréscimo em compressão. A figura \ref{fig:plastiso} exemplifica um ciclo de carga e descarga para a plasticidade isotrópica.
+O segundo comportamento típico é a plasticidade isotrópica. Nela a tensão limite de escoamento é alterada por conta de deformações plásticas. Portanto, caso uma tensão trativa gerar deformação plástica em um ponto, um subsequente ciclo de carregamento necessitará de maior tensão trativa para gerar deformação plástica neste mesmo ponto. O característico da plasticidade isotrópica é que o aumento do limite de escoamento em tração significa também um aumento do limite de escoamento em compressão.
+Portanto, como mostra a figura \ref{fig:plastiso}, um ciclo de carregamento em tração gera deformação plástica, aumentando o limite de escoamento tanto em tração quanto em compressão. Um ciclo subsequente em compressão precisará atingir a tensão de escoamento inicial $\sigma_y$ somada a um delta de tensão $d\sigma$ para provocar deformação plástica. 
 
 \begin{figure}[H]
     \centering
@@ -48,7 +49,7 @@ O segundo comportamento típico é a plasticidade isotrópica, nela a tensão li
     \fonte{O autor (2020)}
 \end{figure}
 
-O último modo de plasticidade é a plasticidade cinemática, nela a tensão limite de escoamento também é alterada de acordo com o nível de deformação plástica do material. Entretanto a distância entre a tensão limite de escoamento em tração e em compressão se mantém igual ao longo do tempo. Portanto um acréscimo na resistência à tensão trativa significa um decréscimo correspondente na resistência à tensão compressiva. A figura \ref{fig:plastcin} exemplifica o fenômeno. \par
+O último modo de plasticidade é a cinemática, nela a tensão limite de escoamento também é alterada de acordo com o nível de deformação plástica do material. Entretanto, a distância entre a tensão limite de escoamento em tração e em compressão se mantém igual ao longo do tempo. Portanto, um acréscimo na resistência à tensão trativa significa um decréscimo correspondente na resistência à tensão compressiva, vide figura \ref{fig:plastcin}.  \par
 
 \begin{figure}[H]
     \centering
@@ -58,7 +59,7 @@ O último modo de plasticidade é a plasticidade cinemática, nela a tensão lim
     \fonte{O autor (2020)}
 \end{figure}
 
-É importante notar que nos casos onde há alteração da tensão de escoamento por conta da deformação plástica é possível que este endurecimento ou encruamento aconteça de forma linear ou não linear. A figura \ref{fig:plastlinvsnlin} exemplifica a diferença entre a plasticidade isotrópica linear e não linear. \par
+Nos casos onde há alteração da tensão de escoamento, por conta da deformação plástica, é possível o endurecimento ou encruamento ocorra de forma linear ou não linear. A figura \ref{fig:plastlinvsnlin} exemplifica a diferença entre a plasticidade isotrópica linear e não linear. \par
 
 \begin{figure}[H]
     \centering
@@ -68,12 +69,15 @@ O último modo de plasticidade é a plasticidade cinemática, nela a tensão lim
     \fonte{O autor (2020)}
 \end{figure}
 
-Outro ponto a se notar é que estes comportamentos podem ser mesclados. Um material pode se comportar de forma isotrópica cinemática não linear. O modelo comporta este tipo de comportamento por meio da adição de parcelas isotrópicas, cinemáticas, lineares e não lineares. \\
+Nada impede que estes comportamentos ocorram ao mesmo tempo. Portanto, um material pode, por exemplo, se comportar de forma isotrópica cinemática não linear. \\
 
 \section{A superfície de escoamento e o espaço das tensões principais}
 
-Até agora a tensão foi tratada como um escalar, portanto tratava-se da tensão observada em um estado uniaxial de tensão. \footnote{Aqui existe a repetição da palavra tensão pois o estado uniaxial de deformação existe e é importante no campo da balística.} O campo de tensões reais é descrito por um tensor, $ \gls{Cauchy} $, que contém nove componentes sendo seis delas independentes entre si. O limite de escoamento, outrora escalar, agora é uma hiper superfície em seis dimensões. A descrição de um espaço hexa dimensional não é trivial e por conta disso foi criada uma descrição que usa a decomposição espectral do tensor de tensões.\footnote{O teorema responsável por tal decomposição é o teorema 
-espectral e pode ser encontrado em \cite{gurtin_fried_anand_2013} pg. 28. } Basicamente o espaço característico do tensor de tensões é composto por seus auto vetores e valores e o teorema espectral torna possível escrever o tensor usando três componentes, os auto valores do tensor, associadas à três direções, os auto vetores. No contexto do tensor de tensões de Cauchy esta descrição chama os auto valores de tensões principais e em forma matricial o tensor é escrito da seguinte maneira
+Até agora a tensão foi tratada como sendo escalar, portanto tratava-se da tensão observada em um estado uniaxial de tensão. \footnote{Aqui existe a repetição da palavra tensão pois o estado uniaxial de deformação existe e é importante no campo da balística.} O campo de tensões reais é descrito por um tensor, $ \gls{Cauchy} $, que contém nove componentes, sendo seis delas independentes entre si. O limite de escoamento, outrora escalar, agora é uma hiper superfície em seis dimensões. A descrição de um espaço hexa dimensional não é trivial, por conta disso, de acordo com \cite{hiermaier_2008},  foi criada uma descrição que usa a decomposição espectral do tensor de tensões.\footnote{O teorema responsável por tal decomposição é o teorema 
+espectral e pode ser encontrado em \cite{gurtin_fried_anand_2013} pg. 28. } \\
+
+O espaço característico do tensor de tensões é composto por seus auto vetores e auto valores. O teorema espectral torna possível escrever o tensor usando três componentes, que são posicionados na diagonal da matriz que representa o tensor. 
+No contexto do tensor de tensões de Cauchy decomposto de forma espectral. Os auto valores são chamados de tensões principais e são os valores das componentes. Os auto vetores são representados pela linha da na matriz e são chamados de direções principais. Em forma matricial o tensor de tensões de Cauchy, descrito de forma espectral, é apresentado a seguir.
 
 \begin{equation}
 \gls{Cauchy} = 
@@ -84,7 +88,7 @@ espectral e pode ser encontrado em \cite{gurtin_fried_anand_2013} pg. 28. } Basi
     \end{bmatrix}
 \end{equation}
 
-Antes de mais nada as tensões desviadoras são apresentadas. Elas formam um tensor que pode ser escrito da seguinte forma
+Como dito anteriormente, é costumeiro decompor de forma aditiva o tensor de tensões. Esta decomposição é feita em duas parcelas, uma desviadora e a outra volumétrica. Portanto, apresenta-se a parcela desviadora do tensor de tensões quando decomposto de forma espectral.
 
 \begin{equation}
 \boldsymbol{S} = 
@@ -104,13 +108,13 @@ Onde
      \sigma_m = \frac{\sigma_1 + \sigma_2 + \sigma_3}{3}
 \end{equation}
 
-No espaço característico do tensor de Cauchy a superfície de escoamento que era descrita em seis dimensões torna-se uma superfície em três dimensões, que pode ser descrita e entendida de forma mais simples. O espaço das tensões principais chama-se Espaço de Haigh-Westergaard, em referência aos pesquisadores que sugeriram tal descrição. Neste espaço o estado de tensões hidrostáticas é representado pela eq. \ref{eq:hydrostress}, onde $ J_1 $ é o primeiro invariante do tensor de tensões desviadoras. Neste estado as tensões desviadores $S_i$ são nulas e portanto a diagonal formada pela eq. \ref{eq:hydrostress} é chamada de eixo hidrostático.  
+No espaço característico do tensor de Cauchy, a superfície de escoamento anteriormente em seis dimensões torna-se uma superfície em três dimensões, que pode ser descrita e entendida de forma mais simples. De acordo com \cite{hiermaier_2008} o espaço das tensões principais chama-se Espaço de Haigh-Westergaard, em referência aos pesquisadores que sugeriram tal descrição. Neste espaço o estado de tensões hidrostáticas é representado pela eq. \ref{eq:hydrostress}, onde $ J_1 $ é o primeiro invariante do tensor de tensões desviadoras. Neste estado as tensões desviadores $S_i$ são nulas, portanto a diagonal formada pela eq. \ref{eq:hydrostress} é chamada de eixo hidrostático.  
 
 \begin{equation} \label{eq:hydrostress}
     \sigma_1 = \sigma_2 = \sigma_3 = \frac{1}{3} J_1
 \end{equation}
 
-Os invariantes $\gls{prinvadesv}$ das tensões desviadoras são usados para definir critérios de escoamento, logo são usados nas funções que descrevem a superfície de escoamento. Existem algumas coordenadas que tem leitura mais clara no espaço de haigh-Westergaard que por sua vez são chamadas de coordenadas de Haigh-Westergaard. A descrição gráfica destas coordenadas é mostrada na figura \ref{fig:coordhaigh}. Uma explicação das coordenadas será dada a seguir, porém antes é necessário definir o que são planos desviadores e meridianos. Planos desviadores são aqueles cuja normal é o eixo hidrostátic e mover-se por um plano desviador significa alterar o estado de tensões desviadoras. Meridianos são perpendiculares aos planos desviadores e contém o eixo hidrostático, mover-se ao longo de um meridiano significa mudar o estado de tensão hidrostática mantendo constante a coordenada $\theta$. A figura \ref{fig:coordhaigh} apresenta tanto um plano desviador quanto um meridiano. \\
+Os invariantes $\gls{prinvadesv}$ das tensões desviadoras são usados para definir critérios de escoamento. Eles são aplicados nas funções que descrevem a superfície de escoamento. Existem algumas coordenadas que possuem leitura mais clara no espaço de haigh-Westergaard, que por sua vez são chamadas de coordenadas de Haigh-Westergaard. A descrição gráfica destas coordenadas é mostrada na figura \ref{fig:coordhaigh}. Uma explicação das coordenadas será dada a seguir, porém para tal é necessário definir o que são planos desviadores e meridianos. Planos desviadores são aqueles cuja normal é o eixo hidrostático, mover-se por um plano desviador significa alterar o estado de tensões desviadoras. Meridianos são perpendiculares aos planos desviadores e contém o eixo hidrostático, mover-se ao longo de um meridiano significa mudar o estado de tensão hidrostática mantendo constante a coordenada $\theta$. A figura \ref{fig:coordhaigh} apresenta tanto um plano desviador quanto um meridiano. \\
 
 \begin{itemize}
     \item $ \xi $: Tem relação direta com o estado de pressão do material, portanto acompanha o eixo hidrostático.
@@ -134,13 +138,13 @@ Os invariantes $\gls{prinvadesv}$ das tensões desviadoras são usados para defi
 
 \section{O critério de escoamento}
 
-O critério de escoamento pode ser representado através de uma função que pode ter como variáveis independentes os invariantes do tensor de tensões desviadoras, as coordenadas de haigh-Westergaard, os invariantes do tensor de tensões ou até as próprias tensões principais. \\
+O critério de escoamento pode ser representado através de uma função que pode ter como variáveis independentes os invariantes do tensor de tensões desviadoras, as coordenadas de haigh-Westergaard, os invariantes do tensor de tensões ou as tensões principais. \\
 
 \subsection{Escoamento independente da pressão.}
 
  \cite{hill} mostrou que não há dependência da pressão na deformação plástica de materiais metálicos, portanto alguns critérios de deformação usam este tipo de abordagem. A afirmação anterior faz com que a função que descreve a superfície de escoamento tenha que ser dependente apenas de $J_2$ e $J_3$, já que $J_1$ é associado à pressão.
 
-Um dos critérios de escoamento mais usados e conhecido é o critério de Von-Mises. Nele o autor do critério assume que a função de escoamento depende apenas de $ J_2 $. De acordo com \cite{hiermaier_2008} a superfície descrita por este critério forma um círculo no plano desviador e este quando projetado em algum plano das tensões principais forma uma elipse. Vide figura \ref{fig:suptrescamises}.
+Um dos critérios de escoamento mais usados, e conhecido, é o critério de Von-Mises. Nele o autor do critério assume que a função de escoamento depende apenas de $ J_2 $. De acordo com \cite{hiermaier_2008} a superfície descrita por este critério forma um círculo no plano desviador, vide figura \ref{fig:trescamises}. Quando este círculo é projetado em algum plano das tensões principais, forma-se uma elipse. No espaço das tensões principais esta superfície pode ser descrita como um cilíndro, cujo centro é o eixo hidrostático, vide figura \ref{fig:suptrescaemises}.
 
 \begin{figure}[H]
     \centering
@@ -150,7 +154,7 @@ Um dos critérios de escoamento mais usados e conhecido é o critério de Von-Mi
     \fonte{\cite{neto_peric_owens_2008}}
 \end{figure}
 
-Outro critério muito conhecido é o de Tresca. Nele o autor assume que a função que descreve a superfície de escoamento depende tanto de $ J_2 $ quanto de $ J_3 $. O terceiro invariante do tensor de tensões desviadoras, $ J_3 $, tem relação com a coordenada $ \theta $ de Haigh-Westergaard, portanto o estado de triaxialidade da tensão tem influência sob o escoamento neste critério. Em um plano desviador a superfície de escoamento de Tresca forma um hexaedro, vide figura \ref{fig:suptrescamises}, que coincide com a superfície de von-mises nos meridianos onde o ângulo $ \theta $ é múltiplo de $ 60º $. A menor distância entre o eixo hidrostático e a superfície de escoamento, no critério de Tresca, acontece nos ângulos múltiplos de $ 30º $ que significam estados de cisalhamento puro. A figura \ref{fig:trescamises} mostra a intersecção das superfícies de tresca e von Mises com um plano desviador qualquer.
+Outro critério muito conhecido é o de Tresca. Seu autor assume que a função que descreve a superfície de escoamento depende tanto de $ J_2 $ quanto de $ J_3 $. O terceiro invariante do tensor de tensões desviadoras, $ J_3 $, tem relação com a coordenada $ \theta $ de Haigh-Westergaard. Portanto, o estado de triaxialidade da tensão tem influência sob o escoamento neste critério. Em um plano desviador a superfície de escoamento de Tresca forma um hexaedro, vide figura \ref{fig:suptrescamises}, que coincide com a superfície de von-mises nos meridianos onde o ângulo $ \theta $ é múltiplo de $ 60º $. A menor distância entre o eixo hidrostático e a superfície de escoamento, no critério de Tresca, acontece nos ângulos múltiplos de $ 30º $ que significam estados de cisalhamento puro. A figura \ref{fig:trescamises} mostra a intersecção das superfícies de tresca e von Mises com um plano desviador qualquer.
 
 
 \begin{figure}[H]
@@ -164,7 +168,7 @@ Outro critério muito conhecido é o de Tresca. Nele o autor assume que a funç�
 
 \subsection{Escoamento dependente da pressão}
 
-Apesar da pressão não influenciar o escoamento de materiais metálicos, ela deve ser levada em consideração quando outros materiais são simulados. Os critérios mais utilizados neste caso podem ser vistos como generalizações dos de Von-mises e de Tresca. A figura \ref{fig:mohrDrucker} mostra os critérios de Mohr-Coulomb, que pode ser visto como uma generalização do critério de Tresca , e de Drucker-Prager, que generaliza o critério de Von-Mises.
+Apesar da pressão não influenciar o escoamento de materiais metálicos, ela deve ser levada em consideração quando outros materiais são simulados. Os critérios mais utilizados neste caso podem ser vistos como generalizações dos de Von-mises e de Tresca. A figura \ref{fig:mohrDrucker} mostra o critério de Mohr-Coulomb, que pode ser visto como uma generalização do critério de Tresca, e de Drucker-Prager, que generaliza o critério de Von-Mises.
 
 \begin{figure}
     \centering
@@ -174,7 +178,7 @@ Apesar da pressão não influenciar o escoamento de materiais metálicos, ela de
      \fonte{\cite{neto_peric_owens_2008}}
 \end{figure}
 
-Tanto o critério de Mohr-Coulomb quanto o critério de Tresca apresentam descontinuidades na superfície de escoamento quando $\theta$ é multiplo de $ 60º $. Fato que de acordo com  \cite{hiermaier_2008} gera complicações numéricas quando algoritmos de retorno são usados para calcular a deformação plástica, estes são os algorítmos mais usados. Com isso é apresentado um terceiro critério de falha na figura \ref{fig:Willamwarnke}, que é o de Willam-Warnke. Veja que a superfície descrita é suave para todos os ângulos $\theta$ facilitanto a aplicação de algoritmos de retorno. 
+Tanto o critério de Mohr-Coulomb quanto o critério de Tresca apresentam descontinuidades na superfície de escoamento quando $\theta$ é multiplo de $ 60º $. Fato que, de acordo com  \cite{hiermaier_2008}, gera complicações numéricas quando algoritmos de retorno são usados para calcular a deformação plástica. Estes são os algorítmos mais usados quando um impacto balístico é simulado, sendo assim é apresentado um terceiro critério de falha na figura \ref{fig:Willamwarnke}, que é o de Willam-Warnke. A superfície descrita é suave para todos os ângulos $\theta$ facilitanto a aplicação de algoritmos de retorno. 
 
 \begin{figure}
     \centering
@@ -186,36 +190,36 @@ Tanto o critério de Mohr-Coulomb quanto o critério de Tresca apresentam descon
 
 \section{As funções de escoamento}
 
-De acordo com \cite{neto_peric_owens_2008} a função de escoamento é responsável por aplicar o critério de escoamento usado. Inicialmente é imposto que a deformação plástica pode ocorrer apenas quando a função de escoamento   
+De acordo com \cite{neto_peric_owens_2008} a função de escoamento é responsável por aplicar o critério de escoamento usado. Inicialmente é imposto que a deformação plástica pode ocorrer apenas quando a função de escoamento $ \phi $ é nula.
 
 \begin{equation}
      \phi(\boldsymbol{\sigma}, \boldsymbol{A}) = 0 
 \end{equation}
 
-Onde \gls{Cauchy} é o tensor de tensão de Cauchy e $\boldsymbol{A}$ é um conjunto de variáveis termodinâmicas que estão ligadas ao encruamento.\\
+Onde \gls{Cauchy} é o tensor de tensão de Cauchy, e $\boldsymbol{A}$ é um conjunto de variáveis termodinâmicas que estão ligadas ao encruamento.\\
 
-O seguinte conjunto, chamado domínio elástico é definido. 
+De acordo com \cite{neto_peric_owens_2008} o seguinte conjunto, chamado domínio elástico é definido. 
 
 \begin{equation}
     \mathcal{E} = \{ \gls{Cauchy} | \phi(\boldsymbol{\sigma}, \boldsymbol{A}) < 0   \}
 \end{equation}
 
-Em todo este conjunto as deformações plásticas não são permitidas. A visualização deste conjunto é auxiliada pelo espaço de tensões principais. Neste espaço o conjunto é formados pelos pontos onde a coordenada $\rho$ é menor do que a correspondente coordenada da superfície. Note que a função de escoamento não restringe o tensor de tensões ao espaço principal, de forma não rigorosa pode-se dizer que a função de escoamento compara a tensão com a hiper superfície descrita previamente. O uso do espaço principal é apenas um auxilio visual para facilitar o entendimento. \\
+Em todo este conjunto as deformações plásticas não são permitidas. A visualização deste conjunto é auxiliada pelo espaço de tensões principais. Neste espaço o conjunto é formado pelos pontos onde a coordenada $\rho$ é menor do que a da superfície de escoamento. Note que a função de escoamento não restringe o tensor de tensões ao espaço principal, este é apenas um auxilio para o entendimento. As funções de escoamento são escritas levando em consideração o tensor descrito de forma geral, assim como a superfície de escoamento em seis dimensões.\\
 
-O escoamento só pode ocorrer quando a tensão se localiza na superfície de escoamento, portanto esta é atingida quando a tensão faz parte do seguinte conjunto 
+O escoamento só pode ocorrer quando a tensão se localiza na superfície de escoamento, portanto esta é atingida quando a tensão faz parte do seguinte conjunto
 
 \begin{equation}
     \mathcal{Y} = \{ \gls{Cauchy} | \phi(\boldsymbol{\sigma}, \boldsymbol{A}) = 0   \}
 \end{equation}
 
 
-\cite{neto_peric_owens_2008} apresenta um conjunto que ele chama de tensões plasticamente admissíveis ou simplesmente tensões admissíveis.
+\cite{neto_peric_owens_2008} apresenta a união destes dois conjuntos. Esta união forma um novo conjunto, chamado de tensões plasticamente admissíveis ou simplesmente tensões admissíveis.
 
 \begin{equation}
     \overline{\mathcal{E}} = \{ \gls{Cauchy} | \phi(\boldsymbol{\sigma}, \boldsymbol{A}) \leq 0   \}
 \end{equation}
 
-Neste conjunto estão todas as tensões que o material pode assumir em qualquer momento. Sendo assim tensões com coordenada $\rho$ superiores à da tensão de escoamento são inadmissíveis. \par
+No conjunto de tensões admissíveis estão todas as tensões que o material pode assumir em qualquer momento. Sendo assim, tensões com coordenada $\rho$ superiores à da tensão de escoamento são inadmissíveis. \par
 
 Além da função de escoamento é necessário definir uma expressão para o fluxo do material quando este está deformando plasticamente. A lei de fluxo é responsável tanto pela taxa de deformação quanto por sua direção.
 
@@ -223,24 +227,24 @@ Além da função de escoamento é necessário definir uma expressão para o flu
     \dot{\varepsilon}^p = \dot{\gamma} \boldsymbol{N}
 \end{equation}
 
-Onde \gls{gamma} é chamado de multiplicador plástico e  define a magnitude da taxa de variação da deformação plástica e \gls{N} é o vetor fluxo plástico. Este vetor é unitário, normal à superfície de escoamento e é definido da seguinte forma
+Onde \gls{gamma} é chamado de multiplicador plástico, ele define a magnitude da taxa de variação da deformação plástica.  \gls{N} é o vetor fluxo plástico. Este é um vetor é unitário, normal à superfície de escoamento e é definido da seguinte forma
 
 \begin{equation}
     \boldsymbol{N} = \frac{\partial \boldsymbol{\Psi}}{\partial \boldsymbol{\sigma}} = \frac{\partial \boldsymbol{\phi}}{\partial \boldsymbol{\sigma}}
 \end{equation}
 
-Onde $\boldsymbol{\Psi} = \boldsymbol{\Psi}(\boldsymbol{\sigma}, \boldsymbol{A}) $ é o chamado potencial de fluxo. Porém é assumido que todos os modelos são associativos e portanto $ \boldsymbol{\Psi} = \boldsymbol{\phi} $. O vetor de Prandt-Reuss é o vetor de fluxo plástico aplicado à superfície de von-mises. No espaço das tensões principais ele tem direção normal ao círculo formado pela superfície em um plano desviador.
+Onde $\boldsymbol{\Psi} = \boldsymbol{\Psi}(\boldsymbol{\sigma}, \boldsymbol{A}) $ é o chamado potencial de fluxo. Porém assume-se, neste trabalho, que todos os modelos são associativos, portanto $ \boldsymbol{\Psi} = \boldsymbol{\phi} $. O vetor de Prandt-Reuss é o vetor de fluxo plástico aplicado à superfície de von-mises. No espaço das tensões principais ele tem direção normal ao círculo formado pela superfície em um plano desviador.
 
 \section{As funções de encruamento}
 
-As funções de encruamento são responsáveis por relacionar a tensão de escoamento às variáveis de estado relevantes. Alguns exemplos de variáveis de estado que podem ser consideradas são: A deformação plástica acumulada $ \overline{\varepsilon}^p $, a taxa de deformação $ \dot{\varepsilon} $ e a temperatura $ T $. A escolha das variáveis envolvidas depende do uso pretendido e da abordagem de um determinado grupo de pesquisa. Existem tanto modelos micromecânicos que levam em consideração a estrutura do material quanto modelos fenomenológicos levam apenas a resposta macroscópica em consideração. Para apresentar funções de encruamento é interessante que se tenha em vista a função de escoamento na qual o encruamento é aplicado, dado que a tarefa da função de encruamento é alterar as características da superfície de escoamento. A formulação de von-mises será usada para apresentar as funções de encruamento pertinentes ao âmbito de impacto balístico já que ela é simples e de fato é base para muitos modelos. \\
+As funções de encruamento são responsáveis por relacionar a tensão de escoamento às variáveis de estado relevantes. Alguns exemplos de variáveis de estado que podem ser consideradas são: A deformação plástica acumulada $ \overline{\varepsilon}^p $, a taxa de deformação $ \dot{\varepsilon} $ e a temperatura $ T $. A escolha das variáveis envolvidas depende do uso pretendido e da abordagem de um determinado grupo de pesquisa. Existem tanto modelos micromecânicos que levam em consideração a estrutura do , quanto modelos fenomenológicos que levam apenas a resposta macroscópica em consideração. Para apresentar funções de encruamento é interessante que se tenha em vista a função de escoamento na qual o encruamento é aplicado, dado que a tarefa da função de encruamento é alterar as características da superfície de escoamento. A formulação de von-mises será usada para apresentar as funções de encruamento pertinentes ao âmbito de impacto balístico já que ela é simples e de fato é base para muitos modelos. \\
 
 A função de escoamento de von-mises assume que a deformação plástica ocorre quando o invariante $ J_2 $ assume um valor crítico.
 \begin{equation} \label{eq:vonesc}
     \boldsymbol{\phi}(\boldsymbol{\sigma}) = \sqrt{J_2} - \tau_y
 \end{equation}
 
-Onde $ \tau_y $ é a tensão de escoamento inicial em cisalhamento e ela se relaciona com a tensão de escoamento em tração uniaxial da seguinte forma.
+Onde $ \tau_y $ é a tensão de escoamento inicial em cisalhamento. Ela se relaciona com a tensão de escoamento em tração uniaxial da seguinte forma.
 \begin{equation}
     \sigma_y = \sqrt{3}\tau_y
 \end{equation}
@@ -249,12 +253,11 @@ De acordo com \cite{neto_peric_owens_2008} usando esta relação e sabendo que
 $ J_2 = \frac{1}{3}\boldsymbol{\sigma}^2 $
 é possível escrever a função de escoamento de von-mises da seguinte forma,
 
-
 \begin{equation} \label{eq:vonesc}
     \boldsymbol{\phi}(\boldsymbol{\sigma}) = q(\boldsymbol{\sigma}) - \sigma_y = \sqrt{3 J_2} - \sigma_y
 \end{equation}
 
- A função  $ q(\sigma) $ é amplamente conhecida como tensão de von-mises ou tensão equivalente.
+ A função  $ q(\sigma) $ é amplamente conhecida como tensão de von-mises ou tensão equivalente. Portanto, de acordo com a função de escoamento de Von-Mises o escoamento ocorre quando a tensão equivalente é igual à tensão de escoamento naquele ponto.
  
  \subsection{Modelo da plasticidade isotrópica ou cinemática}
 
@@ -264,16 +267,17 @@ De acordo com \cite{rao_narayanamurthy_simha_2016} a expressão da tensão de vo
     \sigma_y = \left[1 + (\frac{\dot{\varepsilon}}{C})^{(\frac{1}{P})} \right](\sigma_0 + \beta E^p \overline{\varepsilon}^p)
 \end{equation}
 
-Este modelo faz uso dos modos clássicos de plasticidade citados anteriormente. Nele $ \beta $ é chamado de parâmetro de endurecimento. Quando $ \beta = 0 $ o encruamento é completamente cinemático e se $ \beta = 1 $ é completamente isotrópico, sendo permitidos valores de $ \beta $ entre $0$ e $1$. $ E^p $ é o módulo tangente ou o coeficiente de encruamento plástico, de acordo com \cite{neto_peric_owens_2008} quando generalizado para três dimensões
-este se torna um tensor de quarta ordem. $\gls{defplastacu}$ é a deformação plástica acumulada, que pode ser calculada de acordo com a equação \ref{eq:defplastacu}. $ \sigma_0 $ é a tensão de escoamento inicial, $\dot{\varepsilon} $ é a taxa de deformação. Finalmente $ C $ e $ P $ são os parâmetros de taxa de deformação de Cowper-Symonds. \par 
+Este é baseado nos modos clássicos de plasticidade citados anteriormente. Nele $ \beta $ é chamado de parâmetro de endurecimento. Quando $ \beta = 0 $ o encruamento é completamente cinemático, caso $ \beta = 1 $ é completamente isotrópico, sendo permitidos valores de $ \beta $ entre $0$ e $1$. $ E^p $ é o módulo tangente ou o coeficiente de encruamento plástico, de acordo com \cite{neto_peric_owens_2008} quando generalizado para três dimensões
+este se torna um tensor de quarta ordem. Já $\gls{defplastacu}$ é a deformação plástica acumulada, que pode ser calculada de acordo com a equação \ref{eq:defplastacu}. $ \sigma_0 $ é a tensão de escoamento inicial, $\dot{\varepsilon} $ é a taxa de deformação. Finalmente $ C $ e $ P $ são parâmetros da taxa de deformação de Cowper-Symonds. \par 
 
 \begin{equation} \label{eq:defplastacu}
     \overline{\varepsilon}^p = \int_0^t |\dot{\varepsilon}^p| dt
 \end{equation}
 
-De acordo com \cite{rao_narayanamurthy_simha_2016} este tipo de modelo é o mais simples em termos da obtenção dos parâmetros necessários para uma simulação de impacto balístico, já que é de origem estática. Ele é aplicável a situações onde a velocidade do impacto é abaixo de $2000 m/s$ e os efeitos térmicos podem ser ignorados. \cite{rao_narayanamurthy_simha_2016} afirma também que este modelo serve para prever satisfatoriamente
+De acordo com \cite{rao_narayanamurthy_simha_2016} este tipo de modelo é o mais simples em termos da obtenção dos parâmetros necessários para uma simulação de impacto balístico, já que é de origem estática. Ele é aplicável a situações onde a velocidade do impacto é baixa e os efeitos térmicos podem ser ignorados. \cite{rao_narayanamurthy_simha_2016} afirma também que este modelo serve para prever satisfatoriamente
  parâmetros como a velocidade residual, profundidade de penetração e padrões de deformação.
  
+ %CONTINUAR REVISAO
  \subsection{Modelo de Johnson-Cook}
  
  O modelo de Johnson-Cook é um modelo empírico que data de 1983 e é o mais usado quando o comportamento de metais em regimes dinâmicos é simulado. Ele leva em consideração os efeitos tanto da taxa de deformação quanto da temperatura na tensão de escoamento. A expressão da tensão equivalente, em uma dimensão, para este modelo é a seguinte
